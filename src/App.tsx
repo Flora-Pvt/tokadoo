@@ -1,12 +1,25 @@
-import Lists from "./pages/lists"
-import Users from "./pages/users"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Navbar from "./components/Navbar"
+import lists from "./pages/lists"
+import users from "./pages/users"
 
 function App() {
   return (
-  <>
-  <Lists />
-  <Users />
-  </>)
+
+    <Router>
+
+      <Navbar />
+      <div>
+        <Switch>
+          <Route exact path="/" component={lists} />
+        </Switch>
+        <Switch>
+          <Route exact path="/users" component={users} />
+        </Switch>
+      </div>
+    </Router>
+  );
 
 }
 
