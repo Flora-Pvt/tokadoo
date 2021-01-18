@@ -1,11 +1,11 @@
-import List from "./pages/list"
-import UserComponent from "./components/userComponent"
+import Lists from "./pages/lists"
+import Users from "./pages/users"
 
 function App() {
   return (
   <>
-  <List/>
-  <UserComponent/>
+  <Lists />
+  <Users />
   </>)
 
 }
