@@ -13,7 +13,7 @@ function Users({ usersData, isLoading, isError }: any) {
             return <li key={user.id}>
               <h2>{user.username}</h2>
               <p>{user.name}</p>
-              <p>{user.city}</p>
+              <p>{user.address.city}</p>
             </li>
           })}
           </ul>)}
