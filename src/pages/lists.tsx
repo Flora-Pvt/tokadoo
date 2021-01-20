@@ -1,11 +1,10 @@
-function Lists({ listsData, usersData, isLoading, isError }: any) {
+function Lists({ currentUserId, listsData, usersData, isLoading, isError }: any) {
 
-  const displayUserId = (userTodos: [{ userId: number }]) => {
+  const displayUser = (userTodos: [{ userId: number }]) => {
     for (let i = 0; i < userTodos.length; i++) {
       return (
         <>
-          <h2 key={userTodos[i].userId}>{userTodos[i].userId}</h2>
-          <h3>{usersData[userTodos[i].userId-1].username}</h3>
+          <h2 key={userTodos[i].userId}>{usersData[userTodos[i].userId - 1].username}</h2>
         </>)
     }
   }
@@ -20,12 +19,12 @@ function Lists({ listsData, usersData, isLoading, isError }: any) {
         <div>Loading ...</div>
       ) : (
           <ul>{listsData.map((userTodos: [{ userId: number, id: number, title: string, completed: boolean }], index: number) => {
-            /*if (index === 0) {
+            if (currentUserId === userTodos[currentUserId - 1].userId) {
               return null
-            } else {*/
+            } else {
               return (
                 <li key={index}>
-                  {displayUserId(userTodos)}
+                  {displayUser(userTodos)}
                   <ul>
                     {userTodos.map((todo: { id: number, title: string, completed: boolean }) => {
                       return <li key={todo.id}>
@@ -37,7 +36,7 @@ function Lists({ listsData, usersData, isLoading, isError }: any) {
                 </li>
               )
             }
-          /*}*/)}
+          })}
           </ul>)}
     </>
   );

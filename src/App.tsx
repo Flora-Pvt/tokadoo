@@ -10,6 +10,8 @@ import listsService from "./services/listsService"
 import usersService from "./services/usersService"
 
 function App() {
+  const currentUserId = 1;
+
   const [listsData, setListsData]: any[] = useState([]);
   const [listsLoading, setListsLoading] = useState(false);
   const [listsError, setListsError] = useState(false);
@@ -37,7 +39,6 @@ function App() {
       let listsArray = []
       for (let i = 1; i < lists[lists.length-1].userId+1; i++) {
         let userList = lists.filter((list: { userId: number }) => list.userId === i)
-        console.log(userList, i)
         listsArray.push(userList)
       }
       setListsData(listsArray)
@@ -54,13 +55,13 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            <Lists listsData={listsData} usersData={usersData} listsLoading={listsLoading} listsError={listsError} />
+            <Lists currentUserId={currentUserId} listsData={listsData} usersData={usersData} listsLoading={listsLoading} listsError={listsError} />
           </Route>
         </Switch>
 
         <Switch>
           <Route exact path="/users">
-            <Users usersData={usersData} usersLoading={usersLoading} usersError={usersError} />
+            <Users currentUserId={currentUserId} usersData={usersData} usersLoading={usersLoading} usersError={usersError} />
           </Route>
         </Switch>
 

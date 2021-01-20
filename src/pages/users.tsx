@@ -1,4 +1,4 @@
-function Users({ usersData, isLoading, isError }: any) {
+function Users({ currentUserId, usersData, isLoading, isError }: any) {
 
   return (
     <>
@@ -10,11 +10,15 @@ function Users({ usersData, isLoading, isError }: any) {
         <div>Loading ...</div>
       ) : (
           <ul>{usersData.map((user: any) => {
-            return <li key={user.id}>
-              <h2>{user.username}</h2>
-              <p>{user.name}</p>
-              <p>{user.address.city}</p>
-            </li>
+            if (currentUserId === user.id) {
+              return null
+            } else {
+              return <li key={user.id}>
+                <h2>{user.username}</h2>
+                <p>{user.name}</p>
+                <p>{user.address.city}</p>
+              </li>
+            }
           })}
           </ul>)}
     </>
