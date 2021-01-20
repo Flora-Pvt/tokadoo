@@ -9,6 +9,9 @@ function Navbar() {
       <Link to="/users" aria-label="link to users page">
         <p>See my friends</p>
       </Link>
+      <Link to="/profil" aria-label="link to my page">
+        <p>Check my profil</p>
+      </Link>
     </>
   )
 }

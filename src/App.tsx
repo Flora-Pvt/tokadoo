@@ -5,6 +5,7 @@ import Navbar from "./parts/Navbar"
 
 import Lists from "./pages/Lists"
 import Users from "./pages/Users"
+import CurrentUser from "./pages/Profil"
 
 import listsService from "./services/listsService"
 import usersService from "./services/usersService"
@@ -62,6 +63,12 @@ function App() {
         <Switch>
           <Route exact path="/users">
             <Users currentUserId={currentUserId} usersData={usersData} usersLoading={usersLoading} usersError={usersError} />
+          </Route>
+        </Switch>
+
+        <Switch>
+          <Route exact path="/profil">
+            <CurrentUser currentUserId={currentUserId} usersData={usersData} usersLoading={usersLoading} usersError={usersError} />
           </Route>
         </Switch>
 
