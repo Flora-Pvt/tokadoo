@@ -1,0 +1,14 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #F5DF4E;
+
+  &_links {
+    display: flex;
+    justify-content: space-between;
+    &_oneLink {
+      margin: 0 15px;
+    }
+  }
+}

@@ -1,4 +1,12 @@
-body {
+* {
   margin: 0;
-  background-color: grey;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+ul {
+  list-style: none;
 }
