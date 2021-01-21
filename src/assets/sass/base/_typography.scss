@@ -14,3 +14,18 @@ code {
 .navbar {
   color: #444346;
 }
+
+.wrapper_header {
+  color: #58575b;
+}
+
+.lists {
+  &_bloc {
+    &_username {
+      color: #58575b;
+    }
+    &_todo-completed {
+      text-decoration: line-through;
+    }
+  }
+}

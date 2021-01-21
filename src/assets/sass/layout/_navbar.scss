@@ -1,12 +1,15 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   padding: 20px;
-  background-color: #F5DF4E;
+  background-color: #f5df4e;
+  position: fixed;
 
   &_links {
     display: flex;
     justify-content: space-between;
+    margin-right: 50px;
     &_oneLink {
       margin: 0 15px;
     }

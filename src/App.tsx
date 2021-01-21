@@ -39,7 +39,7 @@ function App() {
       setListsLoading(true)
       // group todos with same userId in array
       let listsArray = []
-      for (let i = 1; i < lists[lists.length-1].userId+1; i++) {
+      for (let i = 1; i < lists[lists.length - 1].userId + 1; i++) {
         let userList = lists.filter((list: { userId: number }) => list.userId === i)
         listsArray.push(userList)
       }
@@ -53,33 +53,33 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div>
 
-        <Switch>
-          <Route exact path="/">
-            <Lists currentUserId={currentUserId} listsData={listsData} usersData={usersData} listsLoading={listsLoading} listsError={listsError} />
-          </Route>
-        </Switch>
 
-        <Switch>
-          <Route exact path="/users">
-            <Users currentUserId={currentUserId} usersData={usersData} usersLoading={usersLoading} usersError={usersError} />
-          </Route>
-        </Switch>
+      <Switch>
+        <Route exact path="/">
+          <Lists currentUserId={currentUserId} listsData={listsData} usersData={usersData} listsLoading={listsLoading} listsError={listsError} />
+        </Route>
+      </Switch>
 
-        <Switch>
-          <Route exact path={"/profil/" + currentUserId}>
-            <User usersData={usersData} usersLoading={usersLoading} usersError={usersError} />
-          </Route>
-        </Switch>
+      <Switch>
+        <Route exact path="/users">
+          <Users currentUserId={currentUserId} usersData={usersData} usersLoading={usersLoading} usersError={usersError} />
+        </Route>
+      </Switch>
 
-        <Switch>
-          <Route exact path="/user/:id">
-            <User usersData={usersData} />
-          </Route>
-        </Switch>
+      <Switch>
+        <Route exact path={"/profil/" + currentUserId}>
+          <User usersData={usersData} usersLoading={usersLoading} usersError={usersError} />
+        </Route>
+      </Switch>
 
-      </div>
+      <Switch>
+        <Route exact path="/user/:id">
+          <User usersData={usersData} />
+        </Route>
+      </Switch>
+
+
     </Router>
   );
 }

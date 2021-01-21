@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  
+  &_header {
+    display: flex;
+    align-items: center;
+
+    &_title {
+      width: 400px;
+      margin: 100px;
+    }
+  }
+}

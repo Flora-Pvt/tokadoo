@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 function Users({ currentUserId, usersData, isLoading, isError }: any) {
 
   return (
-    <>
-      <h1>All your friends : </h1>
+    <main className="wrapper">
+      <h1 className="wrapper_header_title">All your friends : </h1>
 
       {isError && <div>Something went wrong ...</div>}
 
       {isLoading ? (
         <div>Loading ...</div>
       ) : (
-          <ul>{usersData.map((user: any) => {
+          <ul className="users">{usersData.map((user: any) => {
             if (currentUserId === user.id) {
               return null
             } else {
@@ -23,7 +23,7 @@ function Users({ currentUserId, usersData, isLoading, isError }: any) {
             }
           })}
           </ul>)}
-    </>
+    </main>
   );
 }
 
