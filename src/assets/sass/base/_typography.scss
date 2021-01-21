@@ -26,6 +26,8 @@ code {
     }
     &_todo-completed {
       text-decoration: line-through;
+      font-style: italic;
+      color: #58575b;
     }
   }
 }

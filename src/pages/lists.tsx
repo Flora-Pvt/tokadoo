@@ -1,13 +1,15 @@
-function Lists({ currentUserId, listsData, usersData, isLoading, isError }: any) {
+import { Link } from "react-router-dom";
 
+function Lists({ currentUserId, listsData, usersData, isLoading, isError }: any) {
   const displayUser = (userTodos: [{ userId: number }]) => {
     for (let i = 0; i < userTodos.length; i++) {
       return (
-        <>
+        <Link to={{ pathname: `/user/${userTodos[i].userId}` }} aria-label="link to your friend page">
           <h2 className="lists_bloc_username" key={userTodos[i].userId}>
             <img className="lists_bloc_avatar" alt="avatar of your friend" src={`./avatars/pexels-${userTodos[i].userId}.jpg`} />
             {usersData[userTodos[i].userId - 1].username}</h2>
-        </>)
+        </Link>
+      )
     }
   }
 
@@ -30,12 +32,17 @@ function Lists({ currentUserId, listsData, usersData, isLoading, isError }: any)
                   {displayUser(userTodos)}
                   <ul>
                     {userTodos.map((todo: { id: number, title: string, completed: boolean }) => {
-                      return <li key={todo.id}>
+                      return <li className="lists_bloc_todo" key={todo.id}>
                         {!todo.completed ?
-                          <p className="lists_bloc_todo">{todo.title}</p>
-                          : <p className="lists_bloc_todo-completed">{todo.title}<img className="lists_bloc_todo_avatar" alt="avatar of your friend" src={`./avatars/pexels-${Math.floor(Math.random() * Math.floor(10))}.jpg`} /></p>
+                          <p className="lists_bloc_todo-incomplete">
+                            {todo.title}
+                          </p>
+                          :
+                          <p className="lists_bloc_todo-completed">
+                            {todo.title}
+                            <img className="lists_bloc_todo_avatar" alt="avatar of your friend" src={`./avatars/pexels-${Math.floor(Math.random() * Math.floor(10))}.jpg`} />
+                          </p>
                         }
-
                       </li>
                     })}
                   </ul>
