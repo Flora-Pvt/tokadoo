@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navbar from "./parts/Navbar"
 
+import Home from "./pages/Home"
 import Lists from "./pages/Lists"
 import Users from "./pages/Users"
 
@@ -38,7 +39,7 @@ function App() {
     listsService.getLists().then(lists => {
       setListsLoading(true)
       // group todos with same userId in array
-      let listsArray = []
+      let listsArray: any[] = []       
       for (let i = 1; i < lists[lists.length - 1].userId + 1; i++) {
         let userList = lists.filter((list: { userId: number }) => list.userId === i)
         listsArray.push(userList)
@@ -54,9 +55,14 @@ function App() {
     <Router>
       <Navbar />
 
+      <Switch>
+        <Route exact path="/" >
+          <Home />
+        </Route>
+      </Switch>
 
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/lists">
           <Lists currentUserId={currentUserId} listsData={listsData} usersData={usersData} listsLoading={listsLoading} listsError={listsError} />
         </Route>
       </Switch>

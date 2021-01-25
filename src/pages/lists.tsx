@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 function Lists({ currentUserId, listsData, usersData, isLoading, isError }: any) {
+
   const displayUser = (userTodos: [{ userId: number }]) => {
     for (let i = 0; i < userTodos.length; i++) {
       return (
@@ -23,7 +24,7 @@ function Lists({ currentUserId, listsData, usersData, isLoading, isError }: any)
       {isLoading ? (
         <div>Loading ...</div>
       ) : (
-          <ul className="lists">{listsData.map((userTodos: [{ userId: number, id: number, title: string, completed: boolean }], index: number) => {
+          <ul data-scroll-container className="lists">{listsData.map((userTodos: [{ userId: number, id: number, title: string, completed: boolean }], index: number) => {
             if (currentUserId === userTodos[currentUserId - 1].userId) {
               return null
             } else {

@@ -6,10 +6,12 @@ function Navbar() {
   return (
     <nav className="navbar">
 
-      <h1 className="navbar_title" >TOKADOO</h1>
+      <Link to="/" aria-label="link to home">
+        <h1 className="navbar_title" >TOKADOO</h1>
+      </Link>
 
       <section className="navbar_links" >
-        <Link to="/" aria-label="link to home with the new lists">
+        <Link to="/lists" aria-label="link to the new lists">
           <p className="navbar_links_oneLink">Lists</p>
         </Link>
         <Link to="/users" aria-label="link to users page">
