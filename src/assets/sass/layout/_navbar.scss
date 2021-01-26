@@ -5,6 +5,7 @@
   padding: 20px;
   background-color: #f5df4e;
   position: fixed;
+  z-index: 1;
 
   &_links {
     display: flex;

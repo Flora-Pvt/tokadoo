@@ -12,13 +12,10 @@ function Navbar() {
 
       <section className="navbar_links" >
         <Link to="/lists" aria-label="link to the new lists">
-          <p className="navbar_links_oneLink">Lists</p>
-        </Link>
-        <Link to="/users" aria-label="link to users page">
-          <p className="navbar_links_oneLink">See my friends</p>
+          <p className="navbar_links_oneLink">Voir ma liste</p>
         </Link>
         <Link to={"/profil/" + currentUserId} aria-label="link to my page">
-          <p className="navbar_links_oneLink">Check my profil</p>
+          <p className="navbar_links_oneLink">Mon profil</p>
         </Link>
       </section>
 

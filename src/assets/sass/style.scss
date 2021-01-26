@@ -1,13 +1,14 @@
 @import "utils/variables";
 @import "utils/mixins";
+@import "utils/locomotive";
 
 @import "base/base";
-@import "base/locomotive";
 @import "base/typography";
 
 @import "layout/header";
 @import "layout/navbar";
 @import "layout/body";
 
+@import "pages/home";
 @import "pages/lists";
 @import "pages/users";

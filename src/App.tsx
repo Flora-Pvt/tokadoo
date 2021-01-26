@@ -5,7 +5,6 @@ import Navbar from "./parts/Navbar"
 
 import Home from "./pages/Home"
 import Lists from "./pages/Lists"
-import Users from "./pages/Users"
 
 import User from "./components/User"
 
@@ -64,12 +63,6 @@ function App() {
       <Switch>
         <Route exact path="/lists">
           <Lists currentUserId={currentUserId} listsData={listsData} usersData={usersData} listsLoading={listsLoading} listsError={listsError} />
-        </Route>
-      </Switch>
-
-      <Switch>
-        <Route exact path="/users">
-          <Users currentUserId={currentUserId} usersData={usersData} usersLoading={usersLoading} usersError={usersError} />
         </Route>
       </Switch>
 

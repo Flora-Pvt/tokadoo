@@ -1,17 +1,15 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/*fonts declaration*/
+@font-face {
+	font-family: 'Fraunces';
+	src: url('/fonts/Fraunces.ttf') format('truetype');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+body {
+  font-family: 'Fraunces', moret, serif;
 }
 
 .navbar {
+	font-family: 'Fraunces', moret, serif;
   color: #444346;
 }
 
@@ -29,5 +27,59 @@ code {
       font-style: italic;
       color: #58575b;
     }
+  }
+}
+
+.gallery__item-number {
+	font-size: 6rem;
+	font-size: clamp(2.5rem,9vw,6.5rem);
+	color: var(--color-gallery-number);
+}
+
+.gallery__item-title {
+	font-size: 4rem;
+	font-size: clamp(2rem,5vw,4rem);
+	color: var(--color-gallery-title);
+}
+
+.gallery__item-number,
+.gallery__item-title,
+.gallery__text {
+	font-family: moret, serif;
+	font-weight: 800;
+	font-style: italic;
+}
+
+.gallery__item-link {
+	font-size: 1.5rem;
+	color: var(--color-gallery-link);
+	text-decoration: underline;
+}
+
+.gallery__item-link:focus,
+.gallery__item-link:hover {
+	color: var(--color-gallery-link-hover);
+	text-decoration: none;
+}
+
+.gallery__item-tags {
+	font-size: 1.5rem;
+}
+
+.gallery__text {
+	font-size: 20vw;
+	line-height: 0.8;
+	text-transform: lowercase;
+	color: var(--color-gallery-title);
+	color: transparent;
+	-webkit-text-stroke: 1px #978c77;
+	text-stroke: 1px #978c77;
+	-webkit-text-fill-color: transparent;
+	text-fill-color: transparent;
+}
+
+.gallery__text-inner {
+  &--small {
+    font-size: 10vh;
   }
 }
