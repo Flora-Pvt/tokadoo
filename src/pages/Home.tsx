@@ -90,22 +90,45 @@ function Home() {
                     <ul>
                       <li className="lists_bloc_todo">
                         <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
+                        <img
+                            className="lists_bloc_todo_gift"
+                            alt="gift"
+                            src={`./images/gifts/bag.jpg`}
+                          />
+                          {"sac à main"}
+                        </p>
+                        
+                      </li>
+                      <li className="lists_bloc_todo">
+                        <p className="lists_bloc_todo-incomplete">
+                        <img
+                            className="lists_bloc_todo_gift"
+                            alt="gift"
+                            src={`./images/gifts/book.jpg`}
+                          />
+                          {"livre"}
+                        
                         </p>
                       </li>
                       <li className="lists_bloc_todo">
                         <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
+                        <img
+                            className="lists_bloc_todo_gift"
+                            alt="gift"
+                            src={`./images/gifts/vase.jpg`}
+                          />
+                          {"vase"}
+                        
                         </p>
                       </li>
                       <li className="lists_bloc_todo">
                         <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
+                        <img
+                            className="lists_bloc_todo_gift"
+                            alt="gift"
+                            src={`./images/gifts/bracelet.jpg`}
+                          />
+                          {"bracelet"}
                         </p>
                       </li>
                       <li className="lists_bloc_todo">
@@ -307,20 +330,20 @@ function Home() {
             </figure>
 
             <div className="gallery__text">
-              <span
-                className="gallery__text-inner"
+              <p
+                className="gallery__text-inner--small"
                 data-scroll=""
                 data-scroll-speed="1"
               >
                 Crée ta liste
-              </span>
-              <span
+              </p>
+              <button
                 data-scroll=""
                 data-scroll-speed="3"
-                className="gallery__text-inner"
+                className="gallery__text-inner--small"
               >
                 maintenant !
-              </span>
+              </button>
             </div>
           </div>
         </div>

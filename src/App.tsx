@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./parts/Navbar"
 
 import Home from "./pages/Home"
-import Lists from "./pages/Lists"
+import Lists from "./pages/List"
 
 import User from "./components/User"
 

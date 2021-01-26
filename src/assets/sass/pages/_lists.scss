@@ -21,6 +21,11 @@
 
     &_todo {
       display: flex;
+      background: #ffffff;
+      box-shadow: 5px 5px 9px #666666, -5px -5px 9px #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 2vh;
       &_avatar {
         width: 30px;
         height: 30px;
@@ -28,6 +33,13 @@
         border-radius: 50%;
         object-fit: cover;
         margin-left: 20px;
+        vertical-align: middle;
+      }
+      &_gift {
+        width: 40px;
+        height: 40px;
+        border: solid 1px white;
+        object-fit: cover;
         vertical-align: middle;
       }
       &_icon {
