@@ -1,14 +1,15 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { User } from "./entity/User.js";
+import { List } from "./entity/List.js";
 
 createConnection()
   .then(async (connection) => {
-    /*let user = new User();
-    user.firstname = "Jane";
+    let user = new User();
+    user.firstname = "Matt";
     user.lastname = "Doe";
-    user.avatar = "photo-of-jane.jpg";
-    user.email = "janedoe@tokadoo.com";
+    user.avatar = "photo-of-Matt.jpg";
+    user.email = "Mattdoe@tokadoo.com";
     user.password = "password";
     user.adressLineOne = "a street";
     user.adressLineTwo = "in a batiment";
@@ -16,10 +17,16 @@ createConnection()
     user.province = "Quebec";
     user.zip = "H1K 1H1";
 
-    await connection.manager.save(user).then((user) => {
-      console.log("User has been saved. Id is", user.id);
-    });*/
-    let savedUser = await connection.manager.find(User);
-    console.log("All users from the db: ", savedUser);
+    let list = new List();
+    list.title = "Matt's birthday";
+    list.user = user;
+
+    let userRepository = connection.getRepository(User);
+    let listRepository = connection.getRepository(List);
+    
+    await userRepository.save(user)
+    await listRepository.save(list)
+    console.log("User from the db: ", user);
+    console.log("List from the db: ", list);
   })
   .catch((error) => console.log(error));
