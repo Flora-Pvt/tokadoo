@@ -5,7 +5,7 @@ import { List } from "./entity/List.js";
 
 createConnection()
   .then(async (connection) => {
-    let user = new User();
+    /*let user = new User();
     user.firstname = "Matt";
     user.lastname = "Doe";
     user.avatar = "photo-of-Matt.jpg";
@@ -27,6 +27,9 @@ createConnection()
     await userRepository.save(user)
     await listRepository.save(list)
     console.log("User from the db: ", user);
-    console.log("List from the db: ", list);
+    console.log("List from the db: ", list);*/
+    let listRepository = connection.getRepository(List);
+    let list = await listRepository.find({ relations: ["user"] });
+    console.log("Users from the db: ", list);
   })
   .catch((error) => console.log(error));
