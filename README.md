@@ -1,7 +1,7 @@
-#Tokadoo
+# Tokadoo
 
 Application pour partager ses listes de cadeaux. Projet en cours...
 
-##Technos
+## Technos
 
 TypeScript, React, GraphQL
