@@ -1,11 +1,7 @@
-# Tokadoo
+#Tokadoo
 
-En cours...
+Application pour partager ses listes de cadeaux. Projet en cours...
 
-## Technos
+##Technos
 
-TypeScript
-
-## Résumé
-
-Front d'une application pour partager ses listes de cadeaux avec ses amis.
+TypeScript, React, GraphQL

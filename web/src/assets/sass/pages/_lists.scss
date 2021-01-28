@@ -1,0 +1,76 @@
+.lists {
+  background-color: $color-secondary;
+  color: white;
+  width: 600px;
+  padding: 40px;
+  margin-bottom: 150px;
+  border-radius: 20px;
+
+  &__username {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2vh;
+  }
+  &__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-left: 2vw;
+  }
+  &__add {
+    width: 60%;
+    margin: 0 20%;
+    border-bottom: solid 1px $color-primary;
+    padding-bottom: 20px;
+    &__icon {
+      margin-left: 10px;
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+    }
+  }
+
+  &__todo {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 20px 0;
+
+    &__avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 20px;
+      object-fit: cover;
+      margin-left: 20px;
+      vertical-align: middle;
+    }
+    &__gift {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      vertical-align: middle;
+      border-radius: 10px;
+    }
+
+    &__infos {
+      padding: 0 0 20px 30px;
+      width: 60%;
+      border-bottom: solid 1px $color-primary;
+    }
+
+    &__actions {
+      width: 20%;
+      &__img {
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+      }
+    }
+    &__icon {
+      width: 40px;
+      margin-left: 15%;
+    }
+  }
+}

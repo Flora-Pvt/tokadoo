@@ -1,0 +1,73 @@
+/* ----- fonts declaration ----- */
+@font-face {
+  font-family: "Fraunces";
+  src: url("../../fonts/Fraunces.ttf") format("truetype");
+}
+
+/* ----- base ----- */
+body {
+  font-family: "Fraunces", moret, serif;
+}
+.navbar {
+  font-family: "Fraunces", moret, serif;
+  color: $color-secondary;
+}
+
+/* ----- list ----- */
+.lists {
+	&_add {
+		font-size: 20px;		
+  }
+  &_todo {
+    &--completed {
+      text-decoration: line-through;
+      font-style: italic;
+		}
+		&_infos {
+			&_link{
+				color: $color-secondary-light;
+			}
+		}
+  }
+}
+
+/* ----- home ----- */
+.home{
+  &__item-number {
+    font-size: 6rem;
+    font-size: clamp(2.5rem, 9vw, 6.5rem);
+    color: var(--color-home-number);
+  }
+  
+  &__item-title {
+    font-size: 4rem;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--color-home-title);
+  }
+
+  &__item-number,
+  &__item-title,
+  &__text {
+    font-family: moret, serif;
+    font-weight: 800;
+    font-style: italic;
+  }
+
+  &__text {
+    font-family: "Fraunces", moret, serif;
+    font-size: 18vw;
+    line-height: 0.8;
+    color: $color-tertiary;
+  }
+
+  &__text-inner {
+    &--small {
+      font-size: 10vh;
+    }
+    &--small-link {
+      font-size: 12vh;
+      color: $color-secondary;
+      text-decoration: underline;
+    }
+  }
+}

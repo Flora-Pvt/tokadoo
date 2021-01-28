@@ -1,0 +1,65 @@
+.home {
+  display: flex;
+  margin-left: 12vw;
+  padding-top: 4vw;
+  padding-right: 12vw;
+
+  &__item {
+    margin: 0 150px;
+    display: grid;
+    grid-template-areas:
+      "... ..."
+      "... home-image";
+    grid-template-columns: 8rem 21vmax;
+    grid-template-rows: 8rem 28vmax;
+    &:nth-child(even) {
+      padding-top: 10vh;
+    }
+  }
+
+  &__item-list {
+    grid-area: home-image;
+    width: 600px;
+    height: 630px;
+    overflow: hidden;
+    position: relative;
+    transform-origin: 50% 100%;
+    margin-left: -150px;
+  }
+
+  &__item-caption {
+    grid-area: 1 / 1 / 4 / 3;
+    display: grid;
+    grid-template-areas:
+      "home-number home-title"
+      "home-link ..."
+      "home-link home-tags";
+    grid-template-columns: 8rem auto;
+    grid-template-rows: 8rem auto 3rem;
+  }
+
+  &__item-number {
+    grid-area: home-number;
+    justify-self: end;
+    padding-right: 2rem;
+  }
+
+  &__item-title {
+    grid-area: home-title;
+    margin: 0;
+  }
+
+  &__item-number,
+  &__item-title,
+  &__text {
+    align-self: center;
+  }
+
+  &__text {
+    margin: 0 10vw 0 14vw;
+  }
+
+  &__text-inner {
+    display: block;
+  }
+}
