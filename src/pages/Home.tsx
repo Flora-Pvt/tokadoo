@@ -31,25 +31,35 @@ function Home() {
               >
                 partager une belle liste de cadeaux,
               </span>
-              <p data-scroll=""
+              <p
+                data-scroll=""
                 data-scroll-speed="1"
-                className="gallery__text-inner--small">garder la surprise jusqu'à la fin.</p>
+                className="gallery__text-inner--small"
+              >
+                garder la surprise jusqu'à la fin.
+              </p>
             </div>
 
             <figure className="gallery__item">
               <div className="gallery__item-img">
                 <div className="gallery__item-imginner">
-                  <div className="lists_bloc">
-                    <h3>Bienvenue sur la liste de Jane : </h3>
-                    <h4 className="lists_bloc_username">
+                  <div className="lists">
+                    <h2 className="lists_username">
+                      Liste de cadeaux pour Jane Doe
                       <img
-                        className="lists_bloc_avatar"
+                        className="lists_avatar"
                         alt="avatar of your friend"
                         src={`./images/avatars/pexels-1.jpg`}
                       />
-                      {"Jane Doe"}
-                    </h4>
-                    <p>{"Ajoute ton premier souhait de cadeau :)"}</p>
+                    </h2>
+                    <p className="lists_add">
+                      Ajouter ton premier cadeau !
+                      <img
+                        className="lists_add_icon"
+                        alt="signe plus"
+                        src="./images/icons/plus.svg"
+                      ></img>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -63,89 +73,116 @@ function Home() {
                   Crée ta liste
                 </h2>
                 <span className="gallery__item-number">01</span>
-                <p className="gallery__item-tags">
-                  <span>#house</span>
-                  <span>#green</span>
-                  <span>#chair</span>
-                </p>
-                <a className="gallery__item-link" href="# ">
-                  explore
-                </a>
               </figcaption>
             </figure>
 
             <figure className="gallery__item">
               <div className="gallery__item-img">
                 <div className="gallery__item-imginner">
-                  <div className="lists_bloc">
-                    <h3>Bienvenue sur la liste de Jane : </h3>
-                    <h4 className="lists_bloc_username">
+                  <div className="lists">
+                    <h2 className="lists_username">
+                      Liste de cadeaux pour Jane Doe
                       <img
-                        className="lists_bloc_avatar"
+                        className="lists_avatar"
                         alt="avatar of your friend"
                         src={`./images/avatars/pexels-1.jpg`}
                       />
-                      {"Jane Doe"}
-                    </h4>
+                    </h2>
+                    <p className="lists_add">
+                      Ajouter un cadeau{" "}
+                      <img
+                        className="lists_add_icon"
+                        alt="signe plus"
+                        src="./images/icons/plus.svg"
+                      ></img>
+                    </p>
+
                     <ul>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
+                      <li className="lists_todo">
                         <img
-                            className="lists_bloc_todo_gift"
-                            alt="gift"
-                            src={`./images/gifts/bag.jpg`}
+                          className="lists_todo_gift"
+                          alt="gift"
+                          src={`./images/gifts/bag.jpg`}
+                        />
+                        <section className="lists_todo_infos">
+                          <p> sac à main </p>
+                          <p className="lists_todo_infos_link">
+                            https://acheter.com/sacamain
+                          </p>
+                          <p>29,30 CA$</p>
+                          <p>quantité : 1</p>
+                        </section>
+                        <section className="lists_todo_actions">
+                          <img
+                            className="lists_todo_actions_img"
+                            alt="supprimer"
+                            src="./images/icons/delete.svg"
                           />
-                          {"sac à main"}
-                        </p>
-                        
+                          <img
+                            className="lists_todo_actions_img"
+                            alt="supprimer"
+                            src="./images/icons/edit.svg"
+                          />
+                        </section>
                       </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
+
+                      <li className="lists_todo">
                         <img
-                            className="lists_bloc_todo_gift"
-                            alt="gift"
-                            src={`./images/gifts/book.jpg`}
+                          className="lists_todo_gift"
+                          alt="gift"
+                          src={`./images/gifts/book.jpg`}
+                        />
+                        <section className="lists_todo_infos">
+                          <p> livre </p>
+                          <p className="lists_todo_infos_link">
+                            https://acheter.com/livre
+                          </p>
+                          <p>29,30 CA$</p>
+                          <p>quantité : 1</p>
+                        </section>
+                        <section className="lists_todo_actions">
+                          <img
+                            className="lists_todo_actions_img"
+                            alt="supprimer"
+                            src="./images/icons/delete.svg"
                           />
-                          {"livre"}
-                        
-                        </p>
+                          <img
+                            className="lists_todo_actions_img"
+                            alt="supprimer"
+                            src="./images/icons/edit.svg"
+                          />
+                        </section>
                       </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
+
+                      <li className="lists_todo">
                         <img
-                            className="lists_bloc_todo_gift"
-                            alt="gift"
-                            src={`./images/gifts/vase.jpg`}
+                          className="lists_todo_gift"
+                          alt="gift"
+                          src={`./images/gifts/bracelet.jpg`}
+                        />
+                        <section className="lists_todo_infos">
+                          <p> bracelet </p>
+                          <p className="lists_todo_infos_link">
+                            https://acheter.com/bracelet
+                          </p>
+                          <p>29,30 CA$</p>
+                          <p>quantité : 1</p>
+                        </section>
+                        <section className="lists_todo_actions">
+                          <img
+                            className="lists_todo_actions_img"
+                            alt="supprimer"
+                            src="./images/icons/delete.svg"
                           />
-                          {"vase"}
-                        
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                        <img
-                            className="lists_bloc_todo_gift"
-                            alt="gift"
-                            src={`./images/gifts/bracelet.jpg`}
+                          <img
+                            className="lists_todo_actions_img"
+                            alt="supprimer"
+                            src="./images/icons/edit.svg"
                           />
-                          {"bracelet"}
-                        </p>
+                        </section>
                       </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
+
+
                     </ul>
                   </div>
                 </div>
@@ -159,70 +196,34 @@ function Home() {
                   Ajoute tes articles
                 </h2>
                 <span className="gallery__item-number">02</span>
-                <p className="gallery__item-tags">
-                  <span>#love</span>
-                  <span>#hug</span>
-                  <span>#people</span>
-                </p>
-                <a className="gallery__item-link" href="# ">
-                  explore
-                </a>
               </figcaption>
             </figure>
 
             <figure className="gallery__item">
               <div className="gallery__item-img">
                 <div className="gallery__item-imginner">
-                  <div className="lists_bloc">
-                    <h3>Bienvenue sur la liste de Jane : </h3>
-                    <h4 className="lists_bloc_username">
-                      <img
-                        className="lists_bloc_avatar"
-                        alt="avatar of your friend"
-                        src={`./images/avatars/pexels-1.jpg`}
-                      />
-                      {"Jane Doe"}
-                    </h4>
-                    <ul>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                    </ul>
-                    <img className="lists_bloc_todo_icon" alt="logo twitter" src={`./images/icons/twitter.svg`} />
-                    <img className="lists_bloc_todo_icon" alt="logo facebook" src={`./images/icons/facebook.svg`} />
+                  <div className="lists">
+                  <img
+                      className="lists_todo_icon"
+                      alt="logo facebook"
+                      src={`./images/icons/facebook.svg`}
+                    />
+                    <img
+                      className="lists_todo_icon"
+                      alt="logo twitter"
+                      src={`./images/icons/twitter.svg`}
+                    />
+                    <img
+                      className="lists_todo_icon"
+                      alt="logo linkedin"
+                      src={`./images/icons/linkedin(1).svg`}
+                    />
+                    <img
+                      className="lists_todo_icon"
+                      alt="logo whatsapp"
+                      src={`./images/icons/whatsapp.svg`}
+                    />
+                    
                   </div>
                 </div>
               </div>
@@ -235,97 +236,6 @@ function Home() {
                   Partage à tes proches
                 </h2>
                 <span className="gallery__item-number">03</span>
-                <p className="gallery__item-tags">
-                  <span>#hike</span>
-                  <span>#nature</span>
-                  <span>#rain</span>
-                </p>
-                <a className="gallery__item-link" href="# ">
-                  explore
-                </a>
-              </figcaption>
-            </figure>
-
-            <figure className="gallery__item">
-              <div className="gallery__item-img">
-                <div className="gallery__item-imginner">
-                  <div className="lists_bloc">
-                    <h3>Bienvenue sur la liste de Jane : </h3>
-                    <h4 className="lists_bloc_username">
-                      <img
-                        className="lists_bloc_avatar"
-                        alt="avatar of your friend"
-                        src={`./images/avatars/pexels-1.jpg`}
-                      />
-                      {"Jane Doe"}
-                    </h4>
-                    <ul>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-completed">
-                          {"todo fini !"}
-                          <img
-                            className="lists_bloc_todo_avatar"
-                            alt="avatar of your friend"
-                            src={`./images/avatars/pexels-2.jpg`}
-                          />
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-completed">
-                          {"todo fini !"}
-                          <img
-                            className="lists_bloc_todo_avatar"
-                            alt="avatar of your friend"
-                            src={`./images/avatars/pexels-3.jpg`}
-                          />
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                      <li className="lists_bloc_todo">
-                        <p className="lists_bloc_todo-incomplete">
-                          {"todo à offrir"}
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <figcaption className="gallery__item-caption">
-                <h2
-                  className="gallery__item-title"
-                  data-scroll=""
-                  data-scroll-speed="1"
-                >
-                  Garde la surprise
-                </h2>
-                <span className="gallery__item-number">04</span>
-                <p className="gallery__item-tags">
-                  <span>#hike</span>
-                  <span>#nature</span>
-                  <span>#rain</span>
-                </p>
-                <a className="gallery__item-link" href="# ">
-                  explore
-                </a>
               </figcaption>
             </figure>
 
@@ -337,13 +247,14 @@ function Home() {
               >
                 Crée ta liste
               </p>
-              <button
+              <a
                 data-scroll=""
                 data-scroll-speed="3"
-                className="gallery__text-inner--small"
+                className="gallery__text-inner--small-link"
+                href="/home"
               >
-                maintenant !
-              </button>
+                {"maintenant :)"}
+              </a>
             </div>
           </div>
         </div>

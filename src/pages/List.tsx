@@ -5,99 +5,124 @@ function List({
   isLoading,
   isError,
 }: any) {
-
   return (
     <main className="wrapper">
-      <header className="wrapper_header">
-        <h1 className="wrapper_header_title">
-          {"Last lists from your friends -->"}{" "}
-        </h1>
-      </header>
-
-      <div className="lists_bloc">
-        <h3>Bienvenue sur la liste de Jane : </h3>
-        <h4 className="lists_bloc_username">
+      <div className="lists">
+        <h2 className="lists_username">
+          Liste de cadeaux pour Jane Doe
           <img
-            className="lists_bloc_avatar"
+            className="lists_avatar"
             alt="avatar of your friend"
             src={`./images/avatars/pexels-1.jpg`}
           />
-          {"Jane Doe"}
-        </h4>
+        </h2>
+        <p className="lists_add">Ajouter un cadeau <img className="lists_add_icon" alt="signe plus" src="./images/icons/plus.svg" ></img></p>
+
         <ul>
-          <li className="lists_bloc_todo">
-            <p className="lists_bloc_todo-incomplete">
+          <li className="lists_todo">
+            <img
+              className="lists_todo_gift"
+              alt="gift"
+              src={`./images/gifts/bag.jpg`}
+            />
+            <section className="lists_todo_infos">
+              <p> sac à main </p>
+              <p className="lists_todo_infos_link">https://acheter.com/sacamain</p>
+              <p>29,30 CA$</p>
+              <p>quantité : 1</p>
+            </section>
+            <section className="lists_todo_actions">
               <img
-                className="lists_bloc_todo_gift"
-                alt="gift"
-                src={`./images/gifts/bag.jpg`}
+                className="lists_todo_actions_img"
+                alt="supprimer"
+                src="./images/icons/delete.svg"
               />
-              {"sac à main"}
-            </p>
+              <img
+                className="lists_todo_actions_img"
+                alt="supprimer"
+                src="./images/icons/edit.svg"
+              />
+            </section>
+          </li>
 
-          </li>
-          <li className="lists_bloc_todo">
-            <p className="lists_bloc_todo-incomplete">
+          <li className="lists_todo">
+            <img
+              className="lists_todo_gift"
+              alt="gift"
+              src={`./images/gifts/book.jpg`}
+            />
+            <section className="lists_todo_infos">
+              <p> livre </p>
+              <p className="lists_todo_infos_link">https://acheter.com/livre</p>
+              <p>29,30 CA$</p>
+              <p>quantité : 1</p>
+            </section>
+            <section className="lists_todo_actions">
               <img
-                className="lists_bloc_todo_gift"
-                alt="gift"
-                src={`./images/gifts/book.jpg`}
+                className="lists_todo_actions_img"
+                alt="supprimer"
+                src="./images/icons/delete.svg"
               />
-              {"livre"}
+              <img
+                className="lists_todo_actions_img"
+                alt="supprimer"
+                src="./images/icons/edit.svg"
+              />
+            </section>
+          </li>
 
-            </p>
-          </li>
-          <li className="lists_bloc_todo">
-            <p className="lists_bloc_todo-incomplete">
+          <li className="lists_todo">
+            <img
+              className="lists_todo_gift"
+              alt="gift"
+              src={`./images/gifts/bracelet.jpg`}
+            />
+            <section className="lists_todo_infos">
+              <p> bracelet </p>
+              <p className="lists_todo_infos_link">https://acheter.com/bracelet</p>
+              <p>29,30 CA$</p>
+              <p>quantité : 1</p>
+            </section>
+            <section className="lists_todo_actions">
               <img
-                className="lists_bloc_todo_gift"
-                alt="gift"
-                src={`./images/gifts/vase.jpg`}
+                className="lists_todo_actions_img"
+                alt="supprimer"
+                src="./images/icons/delete.svg"
               />
-              {"vase"}
+              <img
+                className="lists_todo_actions_img"
+                alt="supprimer"
+                src="./images/icons/edit.svg"
+              />
+            </section>
+          </li>
 
-            </p>
-          </li>
-          <li className="lists_bloc_todo">
-            <p className="lists_bloc_todo-incomplete">
+          <li className="lists_todo">
+            <img
+              className="lists_todo_gift"
+              alt="gift"
+              src={`./images/gifts/vase.jpg`}
+            />
+            <section className="lists_todo_infos">
+              <p> vase </p>
+              <p className="lists_todo_infos_link">https://acheter.com/vase</p>
+              <p>29,30 CA$</p>
+              <p>quantité : 1</p>
+            </section>
+            <section className="lists_todo_actions">
               <img
-                className="lists_bloc_todo_gift"
-                alt="gift"
-                src={`./images/gifts/bracelet.jpg`}
+                className="lists_todo_actions_img"
+                alt="supprimer"
+                src="./images/icons/delete.svg"
               />
-              {"bracelet"}
-            </p>
-          </li>
-          <li className="lists_bloc_todo">
-          <p className="lists_bloc_todo-incomplete">
               <img
-                className="lists_bloc_todo_gift"
-                alt="gift"
-                src={`./images/gifts/bracelet.jpg`}
+                className="lists_todo_actions_img"
+                alt="supprimer"
+                src="./images/icons/edit.svg"
               />
-              {"bracelet"}
-            </p>
+            </section>
           </li>
-          <li className="lists_bloc_todo">
-          <p className="lists_bloc_todo-incomplete">
-              <img
-                className="lists_bloc_todo_gift"
-                alt="gift"
-                src={`./images/gifts/bracelet.jpg`}
-              />
-              {"bracelet"}
-            </p>
-          </li>
-          <li className="lists_bloc_todo">
-          <p className="lists_bloc_todo-incomplete">
-              <img
-                className="lists_bloc_todo_gift"
-                alt="gift"
-                src={`./images/gifts/bracelet.jpg`}
-              />
-              {"bracelet"}
-            </p>
-          </li>
+          
         </ul>
       </div>
     </main>
