@@ -7,15 +7,15 @@ function Navbar() {
     <nav className="navbar">
 
       <Link to="/" aria-label="link to home">
-        <h1 className="navbar_title" >TOKADOO</h1>
+        <h1 className="navbar__title" >TOKADOO</h1>
       </Link>
 
-      <section className="navbar_links" >
+      <section className="navbar__links" >
         <Link to="/lists" aria-label="link to the new lists">
-          <p className="navbar_links_oneLink">Voir ma liste</p>
+          <p className="navbar__links__oneLink">Voir ma liste</p>
         </Link>
         <Link to={"/profil/" + currentUserId} aria-label="link to my page">
-          <p className="navbar_links_oneLink">Mon profil</p>
+          <p className="navbar__links__oneLink">Mon profil</p>
         </Link>
       </section>
 
