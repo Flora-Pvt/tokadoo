@@ -1,11 +1,6 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
 import { User } from "./User";
+import { Gift } from "./Gift";
 
 @Entity()
 export class List {
@@ -15,7 +10,9 @@ export class List {
   @Column()
   title: string;
 
-  @OneToOne((type) => User)
-  @JoinColumn()
+  @ManyToOne((_type) => User, (user) => user.lists)
   user: User;
+
+  @OneToMany(_type => Gift, gift => gift.list)
+  gifts: Gift[];
 }

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { List } from "./List";
 
 @Entity()
 export class User {
@@ -23,9 +24,9 @@ export class User {
   @Column()
   adressLineOne: string;
 
-  @Column()
+  @Column({ nullable: true })
   adressLineTwo: string;
-  
+
   @Column()
   city: string;
 
@@ -34,4 +35,7 @@ export class User {
 
   @Column()
   zip: string;
+
+  @OneToMany((_type) => List, (list) => list.user)
+  lists: List[];
 }

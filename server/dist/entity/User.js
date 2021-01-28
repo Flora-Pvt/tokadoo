@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
+const List_1 = require("./List");
 let User = class User {
 };
 __decorate([
@@ -42,7 +43,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "adressLineOne", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ nullable: true }),
     __metadata("design:type", String)
 ], User.prototype, "adressLineTwo", void 0);
 __decorate([
@@ -57,6 +58,10 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], User.prototype, "zip", void 0);
+__decorate([
+    typeorm_1.OneToMany((_type) => List_1.List, (list) => list.user),
+    __metadata("design:type", Array)
+], User.prototype, "lists", void 0);
 User = __decorate([
     typeorm_1.Entity()
 ], User);

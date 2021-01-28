@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.List = void 0;
 const typeorm_1 = require("typeorm");
 const User_1 = require("./User");
+const Gift_1 = require("./Gift");
 let List = class List {
 };
 __decorate([
@@ -23,10 +24,13 @@ __decorate([
     __metadata("design:type", String)
 ], List.prototype, "title", void 0);
 __decorate([
-    typeorm_1.OneToOne((type) => User_1.User),
-    typeorm_1.JoinColumn(),
+    typeorm_1.ManyToOne((_type) => User_1.User, (user) => user.lists),
     __metadata("design:type", User_1.User)
 ], List.prototype, "user", void 0);
+__decorate([
+    typeorm_1.OneToMany(_type => Gift_1.Gift, gift => gift.list),
+    __metadata("design:type", Array)
+], List.prototype, "gifts", void 0);
 List = __decorate([
     typeorm_1.Entity()
 ], List);

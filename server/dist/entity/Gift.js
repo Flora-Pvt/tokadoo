@@ -39,8 +39,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Gift.prototype, "purchased", void 0);
 __decorate([
-    typeorm_1.OneToOne((type) => List_1.List),
-    typeorm_1.JoinColumn(),
+    typeorm_1.ManyToOne((_type) => List_1.List, (list) => list.gifts),
     __metadata("design:type", List_1.List)
 ], Gift.prototype, "list", void 0);
 Gift = __decorate([

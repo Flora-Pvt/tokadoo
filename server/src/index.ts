@@ -28,8 +28,7 @@ createConnection()
     await listRepository.save(list)
     console.log("User from the db: ", user);
     console.log("List from the db: ", list);*/
-    let listRepository = connection.getRepository(List);
-    let list = await listRepository.find({ relations: ["user"] });
+    let list = connection.getRepository(List).findOne(1, { relations: ["user"] });
     console.log("Users from the db: ", list);
   })
   .catch((error) => console.log(error));
