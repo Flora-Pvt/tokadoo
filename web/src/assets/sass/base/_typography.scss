@@ -1,7 +1,7 @@
 /*fonts declaration*/
 @font-face {
   font-family: "Fraunces";
-  src: url("/fonts/Fraunces.ttf") format("truetype");
+  src: url("../../fonts/Fraunces.ttf") format("truetype");
 }
 
 body {
@@ -16,7 +16,8 @@ body {
 .lists {
 	&_add {
 		font-size: 20px;		
-	}
+  }
+  
   &_todo {
     &--completed {
       text-decoration: line-through;
