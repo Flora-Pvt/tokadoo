@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne,
+  JoinColumn } from "typeorm";
 import { List } from "./List";
 
 @Entity()
@@ -21,6 +22,7 @@ export class Gift {
   @Column()
   purchased: boolean;
 
-  @ManyToOne((_type) => List, (list) => list.gifts)
+  @OneToOne((_type) => List)
+  @JoinColumn()
   list: List;
 }

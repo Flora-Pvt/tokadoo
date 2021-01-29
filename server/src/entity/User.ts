@@ -1,5 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { List } from "./List";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -35,7 +34,4 @@ export class User {
 
   @Column()
   zip: string;
-
-  @OneToMany((_type) => List, (list) => list.user)
-  lists: List[];
 }
