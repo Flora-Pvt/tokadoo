@@ -1,11 +1,35 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
+import express from "express";
+import * as bodyParser from "body-parser";
+import { ApolloServer } from "apollo-server-express";
+import { buildSchema } from "type-graphql";
+
 // import { User } from "./entity/User.js";
 import { List } from "./entity/List.js";
+import { HelloResolver } from "./resolvers/hello.js";
 // import { Gift } from "./entity/Gift.js";
 
 createConnection()
   .then(async (connection) => {
+    // create express app
+    const app = express();
+    app.use(bodyParser.json());
+
+    const apolloServer = new ApolloServer({
+      schema: await buildSchema({
+        resolvers: [HelloResolver],
+        validate: false,
+      }),
+    });
+
+    apolloServer.applyMiddleware({ app });
+
+    // run app
+    app.listen(4000);
+
+    console.log("Express application is up and running on port 4000");
+
     /*let user = new User();
     user.firstname = "Matt";
     user.lastname = "Doe";
