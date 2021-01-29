@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import { User } from "./entity/User.js";
+// import { User } from "./entity/User.js";
 import { List } from "./entity/List.js";
-import { Gift } from "./entity/Gift.js";
+// import { Gift } from "./entity/Gift.js";
 
 createConnection()
   .then(async (connection) => {
@@ -40,7 +40,7 @@ createConnection()
     console.log("User from the db: ", user);
     console.log("List from the db: ", list);
     console.log("Gift from the db: ", gift); */
-    let list = connection.getRepository(List).findOne(1);
+    let list = await connection.getRepository(List).findOne(1);
     console.log("Users from the db: ", list);
   })
   .catch((error) => console.log(error));
