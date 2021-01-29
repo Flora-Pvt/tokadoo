@@ -30,21 +30,23 @@ const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
 const List_js_1 = require("./entity/List.js");
 const hello_js_1 = require("./resolvers/hello.js");
+const list_js_1 = require("./resolvers/list.js");
 typeorm_1.createConnection()
     .then(async (connection) => {
     const app = express_1.default();
     app.use(bodyParser.json());
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: await type_graphql_1.buildSchema({
-            resolvers: [hello_js_1.HelloResolver],
+            resolvers: [hello_js_1.HelloResolver, list_js_1.ListResolver],
             validate: false,
         }),
+        context: ({ req, res }) => ({ req, res, connection }),
     });
     apolloServer.applyMiddleware({ app });
     app.listen(4000);
     console.log("Express application is up and running on port 4000");
     let list = await connection.getRepository(List_js_1.List).findOne(1);
-    console.log("Users from the db: ", list);
+    console.log("List from the db: ", list);
 })
     .catch((error) => console.log(error));
 //# sourceMappingURL=index.js.map

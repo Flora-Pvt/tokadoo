@@ -7,8 +7,11 @@ import { buildSchema } from "type-graphql";
 
 // import { User } from "./entity/User.js";
 import { List } from "./entity/List.js";
-import { HelloResolver } from "./resolvers/hello.js";
 // import { Gift } from "./entity/Gift.js";
+
+import { HelloResolver } from "./resolvers/hello.js";
+import { ListResolver } from "./resolvers/list.js";
+
 
 createConnection()
   .then(async (connection) => {
@@ -18,9 +21,10 @@ createConnection()
 
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
-        resolvers: [HelloResolver],
+        resolvers: [HelloResolver, ListResolver],
         validate: false,
       }),
+      context: ({ req, res }) => ({ req, res, connection }),
     });
 
     apolloServer.applyMiddleware({ app });
@@ -65,6 +69,6 @@ createConnection()
     console.log("List from the db: ", list);
     console.log("Gift from the db: ", gift); */
     let list = await connection.getRepository(List).findOne(1);
-    console.log("Users from the db: ", list);
+    console.log("List from the db: ", list);
   })
   .catch((error) => console.log(error));
