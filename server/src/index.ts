@@ -10,6 +10,7 @@ import { List } from "./entity/List.js";
 // import { Gift } from "./entity/Gift.js";
 
 import { HelloResolver } from "./resolvers/hello.js";
+import { UserResolver } from "./resolvers/user.js";
 import { ListResolver } from "./resolvers/list.js";
 
 
@@ -21,7 +22,7 @@ createConnection()
 
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
-        resolvers: [HelloResolver, ListResolver],
+        resolvers: [HelloResolver, ListResolver, UserResolver],
         validate: false,
       }),
       context: ({ req, res }) => ({ req, res, connection }),

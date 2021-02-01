@@ -30,6 +30,7 @@ const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
 const List_js_1 = require("./entity/List.js");
 const hello_js_1 = require("./resolvers/hello.js");
+const user_js_1 = require("./resolvers/user.js");
 const list_js_1 = require("./resolvers/list.js");
 typeorm_1.createConnection()
     .then(async (connection) => {
@@ -37,7 +38,7 @@ typeorm_1.createConnection()
     app.use(bodyParser.json());
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: await type_graphql_1.buildSchema({
-            resolvers: [hello_js_1.HelloResolver, list_js_1.ListResolver],
+            resolvers: [hello_js_1.HelloResolver, list_js_1.ListResolver, user_js_1.UserResolver],
             validate: false,
         }),
         context: ({ req, res }) => ({ req, res, connection }),

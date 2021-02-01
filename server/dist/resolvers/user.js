@@ -11,9 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserResolver = void 0;
+require("reflect-metadata");
 const type_graphql_1 = require("type-graphql");
+const typeorm_1 = require("typeorm");
+const argon2_1 = __importDefault(require("argon2"));
 const User_1 = require("../entity/User");
 let UserInputs = class UserInputs {
 };
@@ -61,28 +67,30 @@ UserInputs = __decorate([
     type_graphql_1.InputType()
 ], UserInputs);
 let UserResolver = class UserResolver {
-    register(options, { req }) {
-        let user = new User_1.User();
-        user.firstname = options.firstname;
-        user.lastname = options.lastname;
-        user.avatar = options.avatar;
-        user.email = options.email;
-        user.password = options.password;
-        user.adressLineOne = options.adressLineOne;
-        user.adressLineTwo = options.adressLineTwo;
-        user.city = options.city;
-        user.province = options.province;
-        user.zip = options.zip;
+    async register(options, {}) {
+        const hashedPassword = await argon2_1.default.hash(options.password);
+        const user = {
+            firstname: options.firstname,
+            lastname: options.lastname,
+            avatar: options.avatar,
+            email: options.email,
+            password: hashedPassword,
+            adressLineOne: options.adressLineOne,
+            adressLineTwo: options.adressLineTwo,
+            city: options.city,
+            province: options.province,
+            zip: options.zip,
+        };
+        await typeorm_1.getConnection().getRepository(User_1.User).save(user);
         return user;
     }
 };
 __decorate([
-    type_graphql_1.Mutation(),
-    __param(0, type_graphql_1.Arg("options")),
-    __param(1, type_graphql_1.Ctx()),
+    type_graphql_1.Mutation(() => User_1.User),
+    __param(0, type_graphql_1.Arg("options")), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [UserInputs, Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "register", null);
 UserResolver = __decorate([
     type_graphql_1.Resolver()

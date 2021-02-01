@@ -1,13 +1,7 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Arg,
-  Field,
-  Ctx,
-  ObjectType,
-  InputType,
-} from "type-graphql";
+import "reflect-metadata";
+import { Resolver, Mutation, Arg, Field, Ctx, InputType } from "type-graphql";
+import { getConnection } from "typeorm";
+import argon2 from "argon2";
 import { MyContext } from "../types";
 import { User } from "../entity/User";
 
@@ -46,23 +40,22 @@ class UserInputs {
 
 @Resolver()
 export class UserResolver {
-  @Mutation()
-  register(
-    @Arg("options") options: UserInputs,
-    @Ctx() { req }: MyContext
-  ) {
-    let user = new User();
-    user.firstname = options.firstname;
-    user.lastname = options.lastname;
-    user.avatar = options.avatar;
-    user.email = options.email;
-    user.password = options.password;
-    user.adressLineOne = options.adressLineOne;
-    user.adressLineTwo = options.adressLineTwo;
-    user.city = options.city;
-    user.province = options.province;
-    user.zip = options.zip;
-
-    return user;
+  @Mutation(() => User)
+  async register(@Arg("options") options: UserInputs, @Ctx() {}: MyContext) {
+    const hashedPassword = await argon2.hash(options.password);
+    const user = {
+      firstname: options.firstname,
+      lastname: options.lastname,
+      avatar: options.avatar,
+      email: options.email,
+      password: hashedPassword,
+      adressLineOne: options.adressLineOne,
+      adressLineTwo: options.adressLineTwo,
+      city: options.city,
+      province: options.province,
+      zip: options.zip,
+    };
+    await getConnection().getRepository(User).save(user);
+    return user
   }
 }
