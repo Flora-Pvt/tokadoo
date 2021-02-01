@@ -1,11 +1,9 @@
-import { Query, Resolver } from "type-graphql";
+import { Field, ObjectType } from "type-graphql";
 import { List } from "../entity/List";
 import "reflect-metadata";
 
-@Resolver()
+@ObjectType()
 export class ListResolver {
-  @Query(() => String)
-  lists() {
-    return "list resolver";
-  }
+  @Field(() => List, { nullable: true })
+  list?: List;
 }

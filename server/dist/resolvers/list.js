@@ -11,20 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ListResolver = void 0;
 const type_graphql_1 = require("type-graphql");
+const List_1 = require("../entity/List");
 require("reflect-metadata");
 let ListResolver = class ListResolver {
-    lists() {
-        return "list resolver";
-    }
 };
 __decorate([
-    type_graphql_1.Query(() => String),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], ListResolver.prototype, "lists", null);
+    type_graphql_1.Field(() => List_1.List, { nullable: true }),
+    __metadata("design:type", List_1.List)
+], ListResolver.prototype, "list", void 0);
 ListResolver = __decorate([
-    type_graphql_1.Resolver()
+    type_graphql_1.ObjectType()
 ], ListResolver);
 exports.ListResolver = ListResolver;
 //# sourceMappingURL=list.js.map
