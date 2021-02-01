@@ -6,7 +6,7 @@ import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 
 // import { User } from "./entity/User.js";
-import { List } from "./entity/List.js";
+// import { List } from "./entity/List.js";
 // import { Gift } from "./entity/Gift.js";
 
 import { HelloResolver } from "./resolvers/hello.js";
@@ -69,7 +69,5 @@ createConnection()
     console.log("User from the db: ", user);
     console.log("List from the db: ", list);
     console.log("Gift from the db: ", gift); */
-    let list = await connection.getRepository(List).findOne(1);
-    console.log("List from the db: ", list);
   })
   .catch((error) => console.log(error));

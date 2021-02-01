@@ -28,7 +28,6 @@ const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
 const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
-const List_js_1 = require("./entity/List.js");
 const hello_js_1 = require("./resolvers/hello.js");
 const user_js_1 = require("./resolvers/user.js");
 const list_js_1 = require("./resolvers/list.js");
@@ -46,8 +45,6 @@ typeorm_1.createConnection()
     apolloServer.applyMiddleware({ app });
     app.listen(4000);
     console.log("Express application is up and running on port 4000");
-    let list = await connection.getRepository(List_js_1.List).findOne(1);
-    console.log("List from the db: ", list);
 })
     .catch((error) => console.log(error));
 //# sourceMappingURL=index.js.map
