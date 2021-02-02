@@ -94,6 +94,16 @@ UserResponse = __decorate([
 ], UserResponse);
 let UserResolver = class UserResolver {
     async register(options, {}) {
+        if (options.password.length < 8) {
+            return {
+                errors: [
+                    {
+                        field: "password",
+                        message: "password length must be greater than 7",
+                    },
+                ],
+            };
+        }
         const hashedPassword = await argon2_1.default.hash(options.password);
         const user = {
             firstname: options.firstname,
@@ -107,7 +117,15 @@ let UserResolver = class UserResolver {
             province: options.province,
             zip: options.zip,
         };
-        await typeorm_1.getConnection().getRepository(User_1.User).save(user);
+        try {
+            await typeorm_1.getConnection().getRepository(User_1.User).save(user);
+        }
+        catch (err) {
+            if (err.code === "ER_DUP_ENTRY")
+                return {
+                    errors: [{ field: "email", message: "this email already exist" }],
+                };
+        }
         return user;
     }
     async login(options, {}) {
@@ -129,7 +147,7 @@ let UserResolver = class UserResolver {
     }
 };
 __decorate([
-    type_graphql_1.Mutation(() => User_1.User),
+    type_graphql_1.Mutation(() => UserResponse),
     __param(0, type_graphql_1.Arg("options")), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [UserInputs, Object]),

@@ -66,8 +66,18 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
-  @Mutation(() => User)
+  @Mutation(() => UserResponse)
   async register(@Arg("options") options: UserInputs, @Ctx() {}: MyContext) {
+    if (options.password.length < 8) {
+      return {
+        errors: [
+          {
+            field: "password",
+            message: "password length must be greater than 7",
+          },
+        ],
+      };
+    }
     const hashedPassword = await argon2.hash(options.password);
     const user = {
       firstname: options.firstname,
@@ -81,7 +91,15 @@ export class UserResolver {
       province: options.province,
       zip: options.zip,
     };
-    await getConnection().getRepository(User).save(user);
+    try {
+      // need query to return after save
+      await getConnection().getRepository(User).save(user);
+    } catch (err) {
+      if (err.code === "ER_DUP_ENTRY")
+        return {
+          errors: [{ field: "email", message: "this email already exist" }],
+        };
+    }
     return user;
   }
 
