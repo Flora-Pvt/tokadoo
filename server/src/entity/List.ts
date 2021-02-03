@@ -1,3 +1,4 @@
+import { Field, ObjectType, Int } from "type-graphql";
 import {
   Entity,
   Column,
@@ -6,13 +7,15 @@ import {
   JoinColumn,
 } from "typeorm";
 import { User } from "./User";
-// import { Gift } from "./Gift";
 
+@ObjectType()
 @Entity()
 export class List {
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field(() => String)
   @Column()
   title: string;
 
