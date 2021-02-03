@@ -93,6 +93,15 @@ UserResponse = __decorate([
     type_graphql_1.ObjectType()
 ], UserResponse);
 let UserResolver = class UserResolver {
+    async loggedUser({ req }) {
+        if (!req.session.userId) {
+            return null;
+        }
+        const user = await typeorm_1.getConnection()
+            .getRepository(User_1.User)
+            .findOne({ id: req.session.userId });
+        return user;
+    }
     async register(options, {}) {
         if (options.password.length < 8) {
             return {
@@ -128,7 +137,7 @@ let UserResolver = class UserResolver {
         }
         return user;
     }
-    async login(options, {}) {
+    async login(options, { req }) {
         const user = await typeorm_1.getConnection()
             .getRepository(User_1.User)
             .findOne({ email: options.email });
@@ -143,9 +152,17 @@ let UserResolver = class UserResolver {
                 errors: [{ field: "password", message: "incorrect password" }],
             };
         }
+        req.session.userId = user.id;
         return { user };
     }
 };
+__decorate([
+    type_graphql_1.Query(() => User_1.User, { nullable: true }),
+    __param(0, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "loggedUser", null);
 __decorate([
     type_graphql_1.Mutation(() => UserResponse),
     __param(0, type_graphql_1.Arg("options")), __param(1, type_graphql_1.Ctx()),

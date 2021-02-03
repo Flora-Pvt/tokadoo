@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import {
   Resolver,
+  Query,
   Mutation,
   Arg,
   Field,
@@ -66,6 +67,17 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+  @Query(() => User, { nullable: true })
+  async loggedUser(@Ctx() { req }: MyContext) {
+    if (!req.session.userId) {
+      return null;
+    }
+    const user = await getConnection()
+      .getRepository(User)
+      .findOne({ id: req.session.userId });
+    return user;
+  }
+
   @Mutation(() => UserResponse)
   async register(@Arg("options") options: UserInputs, @Ctx() {}: MyContext) {
     if (options.password.length < 8) {
@@ -106,7 +118,7 @@ export class UserResolver {
   @Mutation(() => UserResponse)
   async login(
     @Arg("options") options: UserInputs,
-    @Ctx() {}: MyContext
+    @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
     const user = await getConnection()
       .getRepository(User)
@@ -122,6 +134,10 @@ export class UserResolver {
         errors: [{ field: "password", message: "incorrect password" }],
       };
     }
+
+    //store user id to keep logged in with cookie
+    req.session!.userId = user.id; 
+
     return { user };
   }
 }
