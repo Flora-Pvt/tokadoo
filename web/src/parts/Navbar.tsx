@@ -12,7 +12,7 @@ function Navbar() {
 
       <section className="navbar__links" >
         <Link to="/lists" aria-label="link to the new lists">
-          <p className="navbar__links__oneLink">Voir ma liste</p>
+          <p className="navbar__links__oneLink">Voir la liste</p>
         </Link>
         <Link to={"/profil/" + currentUserId} aria-label="link to my page">
           <p className="navbar__links__oneLink">Mon profil</p>

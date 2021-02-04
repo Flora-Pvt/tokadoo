@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./parts/Navbar"
 
 import Home from "./pages/Home"
-import Lists from "./pages/List"
+import List from "./pages/List"
 
 import User from "./components/User"
 
@@ -62,7 +62,7 @@ function App() {
 
       <Switch>
         <Route exact path="/lists">
-          <Lists currentUserId={currentUserId} listsData={listsData} usersData={usersData} listsLoading={listsLoading} listsError={listsError} />
+          <List currentUserId={currentUserId} listsData={listsData} usersData={usersData} listsLoading={listsLoading} listsError={listsError} />
         </Route>
       </Switch>
 
@@ -77,8 +77,6 @@ function App() {
           <User usersData={usersData} />
         </Route>
       </Switch>
-
-
     </Router>
   );
 }

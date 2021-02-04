@@ -1,128 +1,117 @@
-function List({
-  currentUserId,
-  listsData,
-  usersData,
-  isLoading,
-  isError,
-}: any) {
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+
+function List({ currentUserId, listData, usersData, isLoading, isError }: any) {
+  const infosRef = useRef({});
+
+  const gifts = [
+    {
+      image: "bag.jpg",
+      name: "Sac à main",
+      link: "https://acheter.com/sacamain",
+      price: "29.30",
+      quantity: "1",
+    },
+    {
+      image: "book.jpg",
+      name: "My secret plan to rule the world",
+      link: "https://acheter.com/mysecretplan",
+      price: "29.30",
+      quantity: "1",
+    },
+    {
+      image: "bracelet.jpg",
+      name: "Bracelet élégant",
+      link: "https://acheter.com/bracelet",
+      price: "29.30",
+      quantity: "1",
+    },
+    {
+      image: "vase.jpg",
+      name: "Vase design",
+      link: "https://acheter.com/vase",
+      price: "29.30",
+      quantity: "1",
+    },
+  ];
+
+  useEffect(() => {
+    gifts.map((gift) => {
+      gsap.set(infosRef.current[gift.name], { yPercent: 0 })
+    });
+  }, []);
+
+  const handleMouseEnter = (ref) => {
+    let tl = gsap.timeline({ pause: true });
+    tl.from(ref, { yPercent: 0 });
+    tl.to(ref, { yPercent: -100 });
+    tl.play();
+  };
+  const handleMouseOut = (ref) => {
+    let tl = gsap.timeline({ pause: true });
+    tl.from(ref, { yPercent: -100 });
+    tl.to(ref, { yPercent: 0 });
+    tl.play();
+  };
+
   return (
     <main className="wrapper">
-      <div className="lists">
-        <h2 className="lists__username">
-          Liste de cadeaux pour Jane Doe
-          <img
-            className="lists__avatar"
-            alt="avatar of your friend"
-            src={`./images/avatars/pexels-1.jpg`}
-          />
-        </h2>
-        <p className="lists__add">Ajouter un cadeau <img className="lists__add__icon" alt="signe plus" src="./images/icons/plus.svg" ></img></p>
-
-        <ul>
-          <li className="lists__todo">
+      <div className="list">
+        <header className="list__header">
+          <h2 className="list__header__username">
+            Liste des cadeaux pour Jane Doe
             <img
-              className="lists__todo__gift"
-              alt="gift"
-              src={`./images/gifts/bag.jpg`}
+              className="list__header__avatar"
+              alt="avatar of your friend"
+              src={`./images/avatars/pexels-1.jpg`}
             />
-            <section className="lists__todo__infos">
-              <p> sac à main </p>
-              <p className="lists__todo__infos__link">https://acheter.com/sacamain</p>
-              <p>29,30 CA$</p>
-              <p>quantité : 1</p>
-            </section>
-            <section className="lists__todo__actions">
-              <img
-                className="lists__todo__actions__img"
-                alt="supprimer"
-                src="./images/icons/delete.svg"
-              />
-              <img
-                className="lists__todo__actions__img"
-                alt="supprimer"
-                src="./images/icons/edit.svg"
-              />
-            </section>
-          </li>
-
-          <li className="lists__todo">
+          </h2>
+         {/*<p className="list__header__add">
+            Ajouter un cadeau{" "}
             <img
-              className="lists__todo__gift"
-              alt="gift"
-              src={`./images/gifts/book.jpg`}
-            />
-            <section className="lists__todo__infos">
-              <p> livre </p>
-              <p className="lists__todo__infos__link">https://acheter.com/livre</p>
-              <p>29,30 CA$</p>
-              <p>quantité : 1</p>
-            </section>
-            <section className="lists__todo__actions">
-              <img
-                className="lists__todo__actions__img"
-                alt="supprimer"
-                src="./images/icons/delete.svg"
-              />
-              <img
-                className="lists__todo__actions__img"
-                alt="supprimer"
-                src="./images/icons/edit.svg"
-              />
-            </section>
-          </li>
+              className="list__header__add__icon"
+              alt="signe plus"
+              src="./images/icons/plus.svg"
+            ></img>
+          </p>*/}
+        </header>
 
-          <li className="lists__todo">
-            <img
-              className="lists__todo__gift"
-              alt="gift"
-              src={`./images/gifts/bracelet.jpg`}
-            />
-            <section className="lists__todo__infos">
-              <p> bracelet </p>
-              <p className="lists__todo__infos__link">https://acheter.com/bracelet</p>
-              <p>29,30 CA$</p>
-              <p>quantité : 1</p>
-            </section>
-            <section className="lists__todo__actions">
-              <img
-                className="lists__todo__actions__img"
-                alt="supprimer"
-                src="./images/icons/delete.svg"
-              />
-              <img
-                className="lists__todo__actions__img"
-                alt="supprimer"
-                src="./images/icons/edit.svg"
-              />
-            </section>
-          </li>
-
-          <li className="lists__todo">
-            <img
-              className="lists__todo__gift"
-              alt="gift"
-              src={`./images/gifts/vase.jpg`}
-            />
-            <section className="lists__todo__infos">
-              <p> vase </p>
-              <p className="lists__todo__infos__link">https://acheter.com/vase</p>
-              <p>29,30 CA$</p>
-              <p>quantité : 1</p>
-            </section>
-            <section className="lists__todo__actions">
-              <img
-                className="lists__todo__actions__img"
-                alt="supprimer"
-                src="./images/icons/delete.svg"
-              />
-              <img
-                className="lists__todo__actions__img"
-                alt="supprimer"
-                src="./images/icons/edit.svg"
-              />
-            </section>
-          </li>
-          
+        <ul className="list__container">
+          {gifts.map((gift, i) => (
+            <li
+              key={i}
+              className="list__todo"
+              onMouseEnter={() => handleMouseEnter(infosRef.current[gift.name])}
+            >
+              <div
+                className="list__todo__gift"
+                style={{
+                  backgroundImage: `url(../../images/gifts/${gift.image})`,
+                }}
+              >
+                <section
+                  className="list__todo__infos"
+                  ref={(el) => (infosRef.current[gift.name] = el)}
+                  onMouseOut={() => handleMouseOut(infosRef.current[gift.name])}
+                >
+                  <p className="list__todo__infos__title">{gift.name} </p>
+                  <p>{gift.price} CA$</p>
+                  <p>Quantité : {gift.quantity}</p>
+                  {/*<img
+                    className="list__todo__actions__img"
+                    alt="supprimer"
+                    src="./images/icons/delete.svg"
+                  />
+                  <img
+                    className="list__todo__actions__img"
+                    alt="supprimer"
+                    src="./images/icons/edit.svg"
+                  />*/}
+                  <p className="list__todo__infos__buy">Envie d'acheter ce cadeau ? Rends-toi ici : <a href={gift.link} className="list__todo__infos__link">{gift.link}</a></p>
+                </section>
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </main>
