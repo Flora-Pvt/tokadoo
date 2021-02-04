@@ -8,27 +8,11 @@
 body {
   font-family: "Fraunces", moret, serif;
 }
+
+/* ----- navbar ----- */
 .navbar {
   font-family: "Fraunces", moret, serif;
   color: $color-secondary;
-}
-
-/* ----- list ----- */
-.lists {
-	&_add {
-		font-size: 20px;		
-  }
-  &_todo {
-    &--completed {
-      text-decoration: line-through;
-      font-style: italic;
-		}
-		&_infos {
-			&_link{
-				color: $color-secondary-light;
-			}
-		}
-  }
 }
 
 /* ----- home ----- */
@@ -69,5 +53,28 @@ body {
       color: $color-secondary;
       text-decoration: underline;
     }
+  }
+}
+
+/* ----- list ----- */
+.list {
+	&__add {
+		font-size: 20px;		  }
+  &__todo {
+		&__infos {
+      font-size: 19px;
+      &__title {
+        font-size: 22px;
+        font-weight: bold;
+      }
+      &__buy{
+        font-weight: bold;
+        color: $color-primary;
+      }
+			&__link{
+        color: white;
+        text-decoration: underline;
+			}
+		}
   }
 }
