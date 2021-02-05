@@ -9,6 +9,9 @@ function Navbar() {
       <Link to="/" aria-label="link to home">
         <h1 className="navbar__title" >TOKADOO</h1>
       </Link>
+      <Link to="/signup" aria-label="link to signup">
+        <p className="navbar__links__oneLink" >S'enregistrer</p>
+      </Link>
 
       <section className="navbar__links" >
         <Link to="/lists" aria-label="link to the new lists">

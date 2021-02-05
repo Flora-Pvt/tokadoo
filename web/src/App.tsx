@@ -5,6 +5,7 @@ import Navbar from "./parts/Navbar"
 
 import Home from "./pages/Home"
 import List from "./pages/List"
+import Signup from "./pages/Signup"
 
 import User from "./components/User"
 
@@ -38,7 +39,7 @@ function App() {
     listsService.getLists().then(lists => {
       setListsLoading(true)
       // group todos with same userId in array
-      let listsArray: any[] = []       
+      let listsArray: any[] = []
       for (let i = 1; i < lists[lists.length - 1].userId + 1; i++) {
         let userList = lists.filter((list: { userId: number }) => list.userId === i)
         listsArray.push(userList)
@@ -61,6 +62,12 @@ function App() {
       </Switch>
 
       <Switch>
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
+      </Switch>
+
+      <Switch>
         <Route exact path="/lists">
           <List currentUserId={currentUserId} listsData={listsData} usersData={usersData} listsLoading={listsLoading} listsError={listsError} />
         </Route>
@@ -77,6 +84,8 @@ function App() {
           <User usersData={usersData} />
         </Route>
       </Switch>
+
+
     </Router>
   );
 }
