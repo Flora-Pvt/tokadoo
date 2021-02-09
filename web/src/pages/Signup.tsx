@@ -1,6 +1,8 @@
-import { useState, useRef } from "react"
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "urql";
+
+import checkValidity from "../utils/checkValidity";
 
 const REGISTER_MUT = `
 mutation Register(
@@ -39,18 +41,18 @@ mutation Register(
     }
   }
 }
-`
+`;
 
 function Signup() {
-  const [fields, setFields]: any = useState({})
-  const [errors, setErrors]: any = useState({})
-  const [avatar, setAvatar]: any = useState("")
-  const fileInput: any = useRef({})
-  const [fileOutput, setFileOutput]: any = useState("./images/icons/gift.svg")
-  const [, register] = useMutation(REGISTER_MUT)
+  const [fields, setFields]: any = useState({});
+  const [errors, setErrors]: any = useState({});
+  const [avatar, setAvatar]: any = useState("");
+  const fileInput: any = useRef({});
+  const [fileOutput, setFileOutput]: any = useState("./images/icons/gift.svg");
+  const [, register] = useMutation(REGISTER_MUT);
 
   const handleChange = (field, event) => {
-    fields[field] = event.target.value
+    fields[field] = event.target.value;
     setFields(fields);
   };
 
@@ -59,63 +61,72 @@ function Signup() {
   };
 
   const handleImageLoaded = (event) => {
-    const file: any = event.target.files[0]
-    setFileOutput(URL.createObjectURL(file))
+    const file: any = event.target.files[0];
+    setFileOutput(URL.createObjectURL(file));
     setAvatar(event.target.files[0]);
   };
 
   const handleValidation = () => {
-    setFields(fields)
+    setFields(fields);
     let errors = {};
-    let formIsValid = true;
+    let formValidity = true;
 
     if (!avatar || avatar === undefined) {
-      formIsValid = false;
+      formValidity = false;
       errors["avatar"] = "Vérifiez l'image ajoutée";
     }
     if (
-      !fields["firstname"] ||
-      typeof fields["firstname"] === undefined ||
       !fields["firstname"].match(
         /^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$/
       )
     ) {
-      formIsValid = false;
+      formValidity = false;
       errors["firstname"] = "Vérifiez les données saisies";
     }
     if (
-      !fields["lastname"] ||
-      typeof fields["lastname"] === undefined ||
       !fields["lastname"].match(
         /^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$/
       )
     ) {
-      formIsValid = false;
+      formValidity = false;
       errors["lastname"] = "Vérifiez les données saisies";
     }
     if (
-      !fields["email"] ||
-      typeof fields["email"] === undefined ||
       !fields["email"].match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       )
     ) {
-      formIsValid = false;
+      formValidity = false;
       errors["email"] = "Votre email doit être valide";
     }
     if (
-      !fields["password"] ||
-      typeof fields["password"] === undefined ||
       !fields["password"].match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,50})/)
     ) {
-      formIsValid = false;
+      formValidity = false;
       errors["password"] =
         "Le mot de passe doit être d'au moins 8 caractères, comporter une majuscule, une minuscule et un chiffre.";
     }
 
+    checkValidity(
+      fields,
+      [
+        "firstname",
+        "lastname",
+        "email",
+        "password",
+        "adressLineOne",
+        "adressLineTwo",
+        "city",
+        "province",
+        "zip",
+      ],
+      errors,
+      formValidity
+    );
+
     setErrors(errors);
-    return formIsValid;
-  }
+    return formValidity;
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -124,22 +135,22 @@ function Signup() {
       setErrors("");
 
       // temp avatar handling
-      fields["avatar"] = fileOutput
+      fields["avatar"] = fileOutput;
       setFields(fields);
 
-      const newUserData = fields
-      register(newUserData)
+      const newUserData = fields;
+      register(newUserData);
     }
   };
 
   return (
     <main className="wrapper">
-      <h1 >Inscription</h1>
+      <h1>Inscription</h1>
       <form
         encType="multipart/form-data"
         onSubmit={(e) => handleSubmit(e)}
-        noValidate      >
-
+        noValidate
+      >
         <input
           ref={fileInput}
           name="avatar"
@@ -148,15 +159,11 @@ function Signup() {
           accept="image/*"
           onChange={(e: any) => handleImageLoaded(e)}
         />
-        <img
-          className="form__avatar"
-          src={fileOutput}
-          alt="avatar miniture"
-        />
+        <img className="form__avatar" src={fileOutput} alt="avatar miniture" />
         <button
           title="Ajouter votre image d'avatar"
-          onClick={() => handleAddImage()}          >
-        </button>
+          onClick={() => handleAddImage()}
+        ></button>
         <span>{errors["avatar"]}</span>
 
         <label htmlFor="firstname">Prénom</label>
@@ -168,9 +175,7 @@ function Signup() {
           value={fields["firstname"]}
           onChange={(e) => handleChange("firstname", e)}
         />
-        <span>
-          {errors["firstname"]}
-        </span>
+        <span>{errors["firstname"]}</span>
 
         <label htmlFor="lastname">Nom</label>
         <input
@@ -181,9 +186,7 @@ function Signup() {
           value={fields["lastname"]}
           onChange={(e) => handleChange("lastname", e)}
         />
-        <span>
-          {errors["lastname"]}
-        </span>
+        <span>{errors["lastname"]}</span>
 
         <label htmlFor="email">Mail</label>
         <input
@@ -205,9 +208,7 @@ function Signup() {
           value={fields["password"]}
           onChange={(e) => handleChange("password", e)}
         />
-        <span>
-          {errors["password"]}
-        </span>
+        <span>{errors["password"]}</span>
 
         <label htmlFor="adressLineOne">Adresse ligne 1</label>
         <input
@@ -218,9 +219,7 @@ function Signup() {
           value={fields["adressLineOne"]}
           onChange={(e) => handleChange("adressLineOne", e)}
         />
-        <span>
-          {errors["adressLineOne"]}
-        </span>
+        <span>{errors["adressLineOne"]}</span>
 
         <label htmlFor="adressLineTwo">Adresse ligne 2</label>
         <input
@@ -230,9 +229,7 @@ function Signup() {
           value={fields["adressLineTwo"]}
           onChange={(e) => handleChange("adressLineTwo", e)}
         />
-        <span>
-          {errors["adressLineTwo"]}
-        </span>
+        <span>{errors["adressLineTwo"]}</span>
 
         <label htmlFor="city">Ville</label>
         <input
@@ -243,9 +240,7 @@ function Signup() {
           value={fields["city"]}
           onChange={(e) => handleChange("city", e)}
         />
-        <span>
-          {errors["city"]}
-        </span>
+        <span>{errors["city"]}</span>
 
         <label htmlFor="province">Province/Département</label>
         <input
@@ -256,9 +251,7 @@ function Signup() {
           value={fields["province"]}
           onChange={(e) => handleChange("province", e)}
         />
-        <span>
-          {errors["province"]}
-        </span>
+        <span>{errors["province"]}</span>
 
         <label htmlFor="zip">Code postal</label>
         <input
@@ -269,23 +262,17 @@ function Signup() {
           value={fields["zip"]}
           onChange={(e) => handleChange("zip", e)}
         />
-        <span>
-          {errors["zip"]}
-        </span>
+        <span>{errors["zip"]}</span>
 
         <button type="submit" onClick={(e) => handleSubmit(e)}>
           Créer un compte
         </button>
         <p>
-          Vous avez déjà un compte ? Connectez vous{" "}
-          <Link to="/login">
-            ici
-          </Link>
+          Vous avez déjà un compte ? Connectez vous <Link to="/login">ici</Link>
         </p>
       </form>
     </main>
   );
-
 }
 
 export default Signup;
