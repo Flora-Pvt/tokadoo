@@ -1,7 +1,45 @@
 import { useState, useRef } from "react"
 import { Link } from "react-router-dom";
+import { useMutation } from "urql";
 
-import usersService from "../services/usersService"
+const REGISTER_MUT = `
+mutation Register(
+  $firstname: String!
+  $lastname: String!
+  $password: String!
+  $avatar: String!
+  $email: String!
+  $adressLineOne: String!
+  $adressLineTwo: String!
+  $city: String!
+  $province: String!
+  $zip: String!
+) {
+  register(
+    options: {
+      firstname: $firstname
+      lastname: $lastname
+      password: $password
+      avatar: $avatar
+      email: $email
+      adressLineOne: $adressLineOne
+      adressLineTwo: $adressLineTwo
+      city: $city
+      province: $province
+      zip: $zip
+    }
+  ) {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      adressLineOne
+    }
+  }
+}
+`
 
 function Signup() {
   const [fields, setFields]: any = useState({})
@@ -9,6 +47,7 @@ function Signup() {
   const [avatar, setAvatar]: any = useState("")
   const fileInput: any = useRef({})
   const [fileOutput, setFileOutput]: any = useState("./images/icons/gift.svg")
+  const [, register] = useMutation(REGISTER_MUT)
 
   const handleChange = (field, event) => {
     fields[field] = event.target.value
@@ -20,7 +59,7 @@ function Signup() {
   };
 
   const handleImageLoaded = (event) => {
-    const file: any = event.target.files[0] 
+    const file: any = event.target.files[0]
     setFileOutput(URL.createObjectURL(file))
     setAvatar(event.target.files[0]);
   };
@@ -35,24 +74,24 @@ function Signup() {
       errors["avatar"] = "Vérifiez l'image ajoutée";
     }
     if (
-      !fields["firstName"] ||
-      typeof fields["firstName"] === undefined ||
-      !fields["firstName"].match(
+      !fields["firstname"] ||
+      typeof fields["firstname"] === undefined ||
+      !fields["firstname"].match(
         /^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$/
       )
     ) {
       formIsValid = false;
-      errors["firstName"] = "Vérifiez les données saisies";
+      errors["firstname"] = "Vérifiez les données saisies";
     }
     if (
-      !fields["lastName"] ||
-      typeof fields["lastName"] === undefined ||
-      !fields["lastName"].match(
+      !fields["lastname"] ||
+      typeof fields["lastname"] === undefined ||
+      !fields["lastname"].match(
         /^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$/
       )
     ) {
       formIsValid = false;
-      errors["lastName"] = "Vérifiez les données saisies";
+      errors["lastname"] = "Vérifiez les données saisies";
     }
     if (
       !fields["email"] ||
@@ -74,7 +113,7 @@ function Signup() {
         "Le mot de passe doit être d'au moins 8 caractères, comporter une majuscule, une minuscule et un chiffre.";
     }
 
-    setErrors({ errors });
+    setErrors(errors);
     return formIsValid;
   }
 
@@ -84,28 +123,12 @@ function Signup() {
     if (handleValidation()) {
       setErrors("");
 
-      const newUserData = new FormData();
-      newUserData.append("image", avatar);
-      newUserData.append(
-        "firstName",
-        JSON.stringify(fields["firstName"])
-      );
-      newUserData.append(
-        "lastName",
-        JSON.stringify(fields["lastName"])
-      );
-      newUserData.append(
-        "officePosition",
-        JSON.stringify(fields["officePosition"])
-      );
-      newUserData.append("email", JSON.stringify(fields["email"]));
-      newUserData.append(
-        "password",
-        JSON.stringify(fields["password"])
-      );
+      // temp avatar handling
+      fields["avatar"] = fileOutput
+      setFields(fields);
 
-      console.log(newUserData)
-      usersService.signupUser(newUserData);
+      const newUserData = fields
+      register(newUserData)
     }
   };
 
@@ -136,30 +159,30 @@ function Signup() {
         </button>
         <span>{errors["avatar"]}</span>
 
-        <label htmlFor="firstName">Prénom</label>
+        <label htmlFor="firstname">Prénom</label>
         <input
           required
-          id="firstName"
-          name="firstName"
+          id="firstname"
+          name="firstname"
           type="text"
-          value={fields["firstName"]}
-          onChange={(e) => handleChange("firstName", e)}
+          value={fields["firstname"]}
+          onChange={(e) => handleChange("firstname", e)}
         />
         <span>
-          {errors["firstName"]}
+          {errors["firstname"]}
         </span>
 
-        <label htmlFor="lastName">Nom</label>
+        <label htmlFor="lastname">Nom</label>
         <input
           required
-          id="lastName"
-          name="lastName"
+          id="lastname"
+          name="lastname"
           type="text"
-          value={fields["lastName"]}
-          onChange={(e) => handleChange("lastName", e)}
+          value={fields["lastname"]}
+          onChange={(e) => handleChange("lastname", e)}
         />
         <span>
-          {errors["lastName"]}
+          {errors["lastname"]}
         </span>
 
         <label htmlFor="email">Mail</label>
@@ -224,7 +247,7 @@ function Signup() {
           {errors["city"]}
         </span>
 
-        <label htmlFor="province">Département</label>
+        <label htmlFor="province">Province/Département</label>
         <input
           required
           id="province"

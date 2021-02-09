@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider, createClient } from 'urql';
 
 import Navbar from "./parts/Navbar"
 
@@ -11,6 +12,8 @@ import User from "./components/User"
 
 import listsService from "./services/listsService"
 import usersService from "./services/usersService"
+
+const client = createClient({url: "http://localhost:4000/graphql"})
 
 function App() {
   const currentUserId = 1;
@@ -52,6 +55,7 @@ function App() {
   }, [])
 
   return (
+    <Provider value={client}>
     <Router>
       <Navbar />
 
@@ -84,9 +88,8 @@ function App() {
           <User usersData={usersData} />
         </Route>
       </Switch>
-
-
     </Router>
+    </Provider>
   );
 }
 
