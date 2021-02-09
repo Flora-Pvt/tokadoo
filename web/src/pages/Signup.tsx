@@ -12,7 +12,8 @@ function Signup() {
 
   const handleChange = (field, event) => {
     fields[field] = event.target.value;
-    setFields({ fields });
+    setFields(fields[field]);
+    console.log(fields)
   };
 
   const handleAddImage = () => {
@@ -122,9 +123,10 @@ function Signup() {
         encType="multipart/form-data"
         onSubmit={(e) => handleSubmit(e)}
         noValidate      >
+
         <input
           ref={fileInput}
-          name="image"
+          name="avatar"
           type="file"
           hidden
           accept="image/*"
@@ -148,6 +150,8 @@ function Signup() {
           onClick={() => handleAddImage()}          >
         </button>
         <span>{errors["avatar"]}</span>
+
+        <label htmlFor="firstName">Prénom</label>
         <input
           required
           id="firstName"
@@ -159,6 +163,8 @@ function Signup() {
         <span>
           {errors["firstName"]}
         </span>
+
+        <label htmlFor="lastName">Nom</label>
         <input
           required
           id="lastName"
@@ -170,17 +176,8 @@ function Signup() {
         <span>
           {errors["lastName"]}
         </span>
-        <input
-          required
-          id="officePosition"
-          name="officePosition"
-          type="text"
-          value={fields["officePosition"]}
-          onChange={(e) => handleChange(fields["officePosition"], e)}
-        />
-        <span>
-          {errors["officePosition"]}
-        </span>
+
+        <label htmlFor="email">Mail</label>
         <input
           required
           id="email"
@@ -190,6 +187,8 @@ function Signup() {
           onChange={(e) => handleChange(fields["email"], e)}
         />
         <span>{errors["email"]}</span>
+
+        <label htmlFor="password">Mot de passe</label>
         <input
           required
           id="password"
@@ -201,14 +200,79 @@ function Signup() {
         <span>
           {errors["password"]}
         </span>
+
+        <label htmlFor="adressLineOne">Adresse ligne 1</label>
+        <input
+          required
+          id="adressLineOne"
+          name="adressLineOne"
+          type="text"
+          value={fields["adressLineOne"]}
+          onChange={(e) => handleChange(fields["adressLineOne"], e)}
+        />
+        <span>
+          {errors["adressLineOne"]}
+        </span>
+
+        <label htmlFor="adressLineTwo">Adresse ligne 2</label>
+        <input
+          id="adressLineTwo"
+          name="adressLineTwo"
+          type="text"
+          value={fields["adressLineTwo"]}
+          onChange={(e) => handleChange(fields["adressLineTwo"], e)}
+        />
+        <span>
+          {errors["adressLineTwo"]}
+        </span>
+
+        <label htmlFor="City">Ville</label>
+        <input
+          required
+          id="City"
+          name="City"
+          type="text"
+          value={fields["City"]}
+          onChange={(e) => handleChange(fields["City"], e)}
+        />
+        <span>
+          {errors["city"]}
+        </span>
+
+        <label htmlFor="province">Département</label>
+        <input
+          required
+          id="province"
+          name="province"
+          type="text"
+          value={fields["province"]}
+          onChange={(e) => handleChange(fields["province"], e)}
+        />
+        <span>
+          {errors["province"]}
+        </span>
+
+        <label htmlFor="zip">Code postal</label>
+        <input
+          required
+          id="zip"
+          name="zip"
+          type="text"
+          value={fields["zip"]}
+          onChange={(e) => handleChange(fields["zip"], e)}
+        />
+        <span>
+          {errors["zip"]}
+        </span>
+
         <button type="submit" onClick={(e) => handleSubmit(e)}>
           Créer un compte
-            </button>
+        </button>
         <p>
           Vous avez déjà un compte ? Connectez vous{" "}
           <Link to="/login">
             ici
-              </Link>
+          </Link>
         </p>
       </form>
     </main>
