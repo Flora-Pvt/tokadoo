@@ -10,7 +10,8 @@ function checkInputs(fields, inputsArray, errors, formValidity) {
     }
   }
 
-  if (fields["firstname"] !== undefined &&
+  if (
+    fields["firstname"] !== undefined &&
     !fields["firstname"].match(
       /^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$/
     )

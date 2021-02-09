@@ -5,15 +5,14 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-
       <Link to="/" aria-label="link to home">
-        <h1 className="navbar__title" >TOKADOO</h1>
+        <h1 className="navbar__title">TOKADOO</h1>
       </Link>
       <Link to="/signup" aria-label="link to signup">
-        <p className="navbar__links__oneLink" >S'enregistrer</p>
+        <p className="navbar__links__oneLink">S'enregistrer</p>
       </Link>
 
-      <section className="navbar__links" >
+      <section className="navbar__links">
         <Link to="/lists" aria-label="link to the new lists">
           <p className="navbar__links__oneLink">Voir la liste</p>
         </Link>
@@ -21,9 +20,8 @@ function Navbar() {
           <p className="navbar__links__oneLink">Mon profil</p>
         </Link>
       </section>
-
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

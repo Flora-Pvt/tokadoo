@@ -1,4 +1,12 @@
-import { useState, useRef } from "react";
+import {
+  useState,
+  useRef,
+  Dispatch,
+  SetStateAction,
+  MutableRefObject,
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+} from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "urql";
 
@@ -43,12 +51,23 @@ mutation Register(
 }
 `;
 
-function Signup() {
-  const [fields, setFields]: any = useState({});
-  const [errors, setErrors]: any = useState({});
-  const [avatar, setAvatar]: any = useState("");
-  const fileInput: any = useRef({});
-  const [fileOutput, setFileOutput]: any = useState("./images/icons/gift.svg");
+function Signup(): JSX.Element {
+  const [fields, setFields]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
+  const [errors, setErrors]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
+  const [avatar, setAvatar]: [
+    string,
+    Dispatch<SetStateAction<string>>
+  ] = useState("");
+  const fileInput:
+    | MutableRefObject<any>
+    | DetailedHTMLProps<
+        InputHTMLAttributes<HTMLInputElement>,
+        HTMLInputElement
+      > = useRef({});
+  const [fileOutput, setFileOutput]: [
+    string,
+    Dispatch<SetStateAction<string>>
+  ] = useState("./images/icons/gift.svg");
   const [, register] = useMutation(REGISTER_MUT);
 
   const handleChange = (field, event) => {
@@ -61,7 +80,7 @@ function Signup() {
   };
 
   const handleImageLoaded = (event) => {
-    const file: any = event.target.files[0];
+    const file = event.target.files[0];
     setFileOutput(URL.createObjectURL(file));
     setAvatar(event.target.files[0]);
   };
@@ -106,9 +125,7 @@ function Signup() {
       // temp avatar handling
       fields["avatar"] = fileOutput;
       setFields(fields);
-
-      const newUserData = fields;
-      register(newUserData);
+      register(fields);
     }
   };
 
@@ -126,7 +143,7 @@ function Signup() {
           type="file"
           hidden
           accept="image/*"
-          onChange={(e: any) => handleImageLoaded(e)}
+          onChange={(e) => handleImageLoaded(e)}
         />
         <img className="form__avatar" src={fileOutput} alt="avatar miniture" />
         <button

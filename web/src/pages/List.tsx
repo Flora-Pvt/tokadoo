@@ -1,45 +1,48 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { gsap } from "gsap";
 
 function List({ currentUserId, listData, usersData, isLoading, isError }: any) {
   const infosRef = useRef({});
 
-  const gifts = [
-    {
-      image: "bag.jpg",
-      name: "Sac à main",
-      link: "https://acheter.com/sacamain",
-      price: "29.30",
-      quantity: "1",
-    },
-    {
-      image: "book.jpg",
-      name: "My secret plan to rule the world",
-      link: "https://acheter.com/mysecretplan",
-      price: "29.30",
-      quantity: "1",
-    },
-    {
-      image: "bracelet.jpg",
-      name: "Bracelet élégant",
-      link: "https://acheter.com/bracelet",
-      price: "29.30",
-      quantity: "1",
-    },
-    {
-      image: "vase.jpg",
-      name: "Vase design",
-      link: "https://acheter.com/vase",
-      price: "29.30",
-      quantity: "1",
-    },
-  ];
+  const gifts = useMemo(
+    () => [
+      {
+        image: "bag.jpg",
+        name: "Sac à main",
+        link: "https://acheter.com/sacamain",
+        price: "29.30",
+        quantity: "1",
+      },
+      {
+        image: "book.jpg",
+        name: "My secret plan to rule the world",
+        link: "https://acheter.com/mysecretplan",
+        price: "29.30",
+        quantity: "1",
+      },
+      {
+        image: "bracelet.jpg",
+        name: "Bracelet élégant",
+        link: "https://acheter.com/bracelet",
+        price: "29.30",
+        quantity: "1",
+      },
+      {
+        image: "vase.jpg",
+        name: "Vase design",
+        link: "https://acheter.com/vase",
+        price: "29.30",
+        quantity: "1",
+      },
+    ],
+    []
+  );
 
   useEffect(() => {
     gifts.map((gift) => {
-      gsap.set(infosRef.current[gift.name], { yPercent: 0 })
+      return gsap.set(infosRef.current[gift.name], { yPercent: 0 });
     });
-  }, []);
+  }, [gifts]);
 
   const handleMouseEnter = (ref) => {
     let tl = gsap.timeline({ pause: true });
@@ -66,7 +69,7 @@ function List({ currentUserId, listData, usersData, isLoading, isError }: any) {
               src={`./images/avatars/pexels-1.jpg`}
             />
           </h2>
-         {/*<p className="list__header__add">
+          {/*<p className="list__header__add">
             Ajouter un cadeau{" "}
             <img
               className="list__header__add__icon"
@@ -107,7 +110,12 @@ function List({ currentUserId, listData, usersData, isLoading, isError }: any) {
                     alt="supprimer"
                     src="./images/icons/edit.svg"
                   />*/}
-                  <p className="list__todo__infos__buy">Envie d'acheter ce cadeau ? Rends-toi ici : <a href={gift.link} className="list__todo__infos__link">{gift.link}</a></p>
+                  <p className="list__todo__infos__buy">
+                    Envie d'acheter ce cadeau ? Rends-toi ici :{" "}
+                    <a href={gift.link} className="list__todo__infos__link">
+                      {gift.link}
+                    </a>
+                  </p>
                 </section>
               </div>
             </li>
