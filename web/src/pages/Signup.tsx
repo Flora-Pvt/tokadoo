@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "urql";
 
-import checkValidity from "../utils/checkValidity";
+import checkInputs from "../utils/checkInputs";
 
 const REGISTER_MUT = `
 mutation Register(
@@ -75,39 +75,8 @@ function Signup() {
       formValidity = false;
       errors["avatar"] = "Vérifiez l'image ajoutée";
     }
-    if (
-      !fields["firstname"].match(
-        /^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$/
-      )
-    ) {
-      formValidity = false;
-      errors["firstname"] = "Vérifiez les données saisies";
-    }
-    if (
-      !fields["lastname"].match(
-        /^([a-zA-Z\u0080-\u024F]+(?: |-| |'))*[a-zA-Z\u0080-\u024F]*$/
-      )
-    ) {
-      formValidity = false;
-      errors["lastname"] = "Vérifiez les données saisies";
-    }
-    if (
-      !fields["email"].match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
-    ) {
-      formValidity = false;
-      errors["email"] = "Votre email doit être valide";
-    }
-    if (
-      !fields["password"].match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,50})/)
-    ) {
-      formValidity = false;
-      errors["password"] =
-        "Le mot de passe doit être d'au moins 8 caractères, comporter une majuscule, une minuscule et un chiffre.";
-    }
 
-    checkValidity(
+    checkInputs(
       fields,
       [
         "firstname",
