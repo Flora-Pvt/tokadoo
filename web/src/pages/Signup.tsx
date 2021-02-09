@@ -4,16 +4,15 @@ import { Link } from "react-router-dom";
 import usersService from "../services/usersService"
 
 function Signup() {
-  const [fields, setFields] = useState({})
-  const [errors, setErrors] = useState({})
-  const [avatar, setAvatar]: any = useState()
-  const fileInput: any = useRef(null)
-  const fileOutput: any = useRef(null)
+  const [fields, setFields]: any = useState({})
+  const [errors, setErrors]: any = useState({})
+  const [avatar, setAvatar]: any = useState("")
+  const fileInput: any = useRef({})
+  const [fileOutput, setFileOutput]: any = useState("./images/icons/gift.svg")
 
   const handleChange = (field, event) => {
-    fields[field] = event.target.value;
-    setFields(fields[field]);
-    console.log(fields)
+    fields[field] = event.target.value
+    setFields(fields);
   };
 
   const handleAddImage = () => {
@@ -21,13 +20,13 @@ function Signup() {
   };
 
   const handleImageLoaded = (event) => {
-    const file: any = event.target.files[0]
-    fileOutput.src = URL.createObjectURL(file);
-    setAvatar({ file });
+    const file: any = event.target.files[0] 
+    setFileOutput(URL.createObjectURL(file))
+    setAvatar(event.target.files[0]);
   };
 
   const handleValidation = () => {
-    setFields({ fields })
+    setFields(fields)
     let errors = {};
     let formIsValid = true;
 
@@ -54,13 +53,6 @@ function Signup() {
     ) {
       formIsValid = false;
       errors["lastName"] = "Vérifiez les données saisies";
-    }
-    if (
-      !fields["officePosition"] ||
-      typeof fields["officePosition"] === undefined
-    ) {
-      formIsValid = false;
-      errors["officePosition"] = "Vérifiez les données saisies";
     }
     if (
       !fields["email"] ||
@@ -112,6 +104,7 @@ function Signup() {
         JSON.stringify(fields["password"])
       );
 
+      console.log(newUserData)
       usersService.signupUser(newUserData);
     }
   };
@@ -132,19 +125,11 @@ function Signup() {
           accept="image/*"
           onChange={(e: any) => handleImageLoaded(e)}
         />
-        {fileOutput.src !== undefined ? (
-          <img
-            ref={fileOutput}
-            alt="avatar miniature"
-          />
-        ) : (
-            <img
-              className="form__avatar"
-              ref={fileOutput}
-              src="./images/icons/gift.svg"
-              alt="cadeau"
-            />
-          )}
+        <img
+          className="form__avatar"
+          src={fileOutput}
+          alt="avatar miniture"
+        />
         <button
           title="Ajouter votre image d'avatar"
           onClick={() => handleAddImage()}          >
@@ -158,7 +143,7 @@ function Signup() {
           name="firstName"
           type="text"
           value={fields["firstName"]}
-          onChange={(e) => handleChange(fields["firstName"], e)}
+          onChange={(e) => handleChange("firstName", e)}
         />
         <span>
           {errors["firstName"]}
@@ -171,7 +156,7 @@ function Signup() {
           name="lastName"
           type="text"
           value={fields["lastName"]}
-          onChange={(e) => handleChange(fields["lastName"], e)}
+          onChange={(e) => handleChange("lastName", e)}
         />
         <span>
           {errors["lastName"]}
@@ -184,7 +169,7 @@ function Signup() {
           name="email"
           type="email"
           value={fields["email"]}
-          onChange={(e) => handleChange(fields["email"], e)}
+          onChange={(e) => handleChange("email", e)}
         />
         <span>{errors["email"]}</span>
 
@@ -195,7 +180,7 @@ function Signup() {
           name="password"
           type="password"
           value={fields["password"]}
-          onChange={(e) => handleChange(fields["password"], e)}
+          onChange={(e) => handleChange("password", e)}
         />
         <span>
           {errors["password"]}
@@ -208,7 +193,7 @@ function Signup() {
           name="adressLineOne"
           type="text"
           value={fields["adressLineOne"]}
-          onChange={(e) => handleChange(fields["adressLineOne"], e)}
+          onChange={(e) => handleChange("adressLineOne", e)}
         />
         <span>
           {errors["adressLineOne"]}
@@ -220,20 +205,20 @@ function Signup() {
           name="adressLineTwo"
           type="text"
           value={fields["adressLineTwo"]}
-          onChange={(e) => handleChange(fields["adressLineTwo"], e)}
+          onChange={(e) => handleChange("adressLineTwo", e)}
         />
         <span>
           {errors["adressLineTwo"]}
         </span>
 
-        <label htmlFor="City">Ville</label>
+        <label htmlFor="city">Ville</label>
         <input
           required
-          id="City"
-          name="City"
+          id="city"
+          name="city"
           type="text"
-          value={fields["City"]}
-          onChange={(e) => handleChange(fields["City"], e)}
+          value={fields["city"]}
+          onChange={(e) => handleChange("city", e)}
         />
         <span>
           {errors["city"]}
@@ -246,7 +231,7 @@ function Signup() {
           name="province"
           type="text"
           value={fields["province"]}
-          onChange={(e) => handleChange(fields["province"], e)}
+          onChange={(e) => handleChange("province", e)}
         />
         <span>
           {errors["province"]}
@@ -259,7 +244,7 @@ function Signup() {
           name="zip"
           type="text"
           value={fields["zip"]}
-          onChange={(e) => handleChange(fields["zip"], e)}
+          onChange={(e) => handleChange("zip", e)}
         />
         <span>
           {errors["zip"]}
