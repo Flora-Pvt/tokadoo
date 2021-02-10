@@ -26,24 +26,4 @@ export class User {
 
   @Column()
   password: string;
-
-  @Field(() => String)
-  @Column()
-  adressLineOne: string;
-
-  @Field(() => String)
-  @Column({ nullable: true })
-  adressLineTwo: string;
-
-  @Field(() => String)
-  @Column()
-  city: string;
-
-  @Field(() => String)
-  @Column()
-  province: string;
-
-  @Field(() => String)
-  @Column()
-  zip: string;
 }

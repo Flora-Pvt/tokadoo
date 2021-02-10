@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import LocomotiveScroll from "locomotive-scroll";
+import "../assets/sass/utils/locomotive-scroll.scss"
 
 function Home() {
   useEffect(() => {

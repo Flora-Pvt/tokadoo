@@ -20,11 +20,6 @@ mutation Register(
   $password: String!
   $avatar: String!
   $email: String!
-  $adressLineOne: String!
-  $adressLineTwo: String!
-  $city: String!
-  $province: String!
-  $zip: String!
 ) {
   register(
     options: {
@@ -33,11 +28,6 @@ mutation Register(
       password: $password
       avatar: $avatar
       email: $email
-      adressLineOne: $adressLineOne
-      adressLineTwo: $adressLineTwo
-      city: $city
-      province: $province
-      zip: $zip
     }
   ) {
     errors {
@@ -46,7 +36,7 @@ mutation Register(
     }
     user {
       id
-      adressLineOne
+      firstname
     }
   }
 }
@@ -105,12 +95,7 @@ function Signup(): JSX.Element {
         "firstname",
         "lastname",
         "email",
-        "password",
-        "adressLineOne",
-        "adressLineTwo",
-        "city",
-        "province",
-        "zip",
+        "password"
       ],
       errors,
       formValidity
@@ -132,13 +117,13 @@ function Signup(): JSX.Element {
 
       register(fields);
 
+      // animation
       let tl = gsap.timeline({ pause: true });
       tl.from(versoRef.current, { yPercent: 0 });
       tl.to(versoRef.current, { yPercent: -100 });
       tl.play();
 
       const relocation = () => {
-        console.log(fields)
         window.location.href = "/lists"
       }
       setTimeout(relocation, 3000)
@@ -146,8 +131,7 @@ function Signup(): JSX.Element {
   };
 
   return (
-    <main className="wrapper">
-      <div className="triangle"></div>
+    <main className="wrapper wrapper--form">
       <form
         encType="multipart/form-data"
         onSubmit={(e) => handleSubmit(e)}
@@ -215,60 +199,6 @@ function Signup(): JSX.Element {
           className="form__input"
         />
         <span className="form__error">{errors["password"]}</span>
-
-        <input
-          required
-          name="adressLineOne"
-          type="text"
-          placeholder="Adresse ligne 1"
-          value={fields["adressLineOne"]}
-          onChange={(e) => handleChange("adressLineOne", e)}
-          className="form__input"
-        />
-        <span className="form__error">{errors["adressLineOne"]}</span>
-
-        <input
-          name="adressLineTwo"
-          type="text"
-          placeholder="Adresse ligne 2"
-          value={fields["adressLineTwo"]}
-          onChange={(e) => handleChange("adressLineTwo", e)}
-          className="form__input"
-        />
-        <span className="form__error">{errors["adressLineTwo"]}</span>
-
-        <input
-          required
-          name="city"
-          type="text"
-          placeholder="Ville"
-          value={fields["city"]}
-          onChange={(e) => handleChange("city", e)}
-          className="form__input"
-        />
-        <span className="form__error">{errors["city"]}</span>
-
-        <input
-          required
-          name="province"
-          type="text"
-          placeholder="Province/Département"
-          value={fields["province"]}
-          onChange={(e) => handleChange("province", e)}
-          className="form__input"
-        />
-        <span className="form__error">{errors["province"]}</span>
-
-        <input
-          required
-          name="zip"
-          type="text"
-          placeholder="Code postal"
-          value={fields["zip"]}
-          onChange={(e) => handleChange("zip", e)}
-          className="form__input"
-        />
-        <span className="form__error">{errors["zip"]}</span>
 
         <button type="submit" onClick={(e) => handleSubmit(e)} className="form__button">
           Créer ton compte

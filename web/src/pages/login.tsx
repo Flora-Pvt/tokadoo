@@ -36,10 +36,9 @@ function Login(): JSX.Element {
   const [errors, setErrors]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
   const [, login] = useMutation(LOGIN_MUT);
 
-  const versoRef = useRef(null);
-  gsap.set(versoRef.current, { yPercent: 0 });
+  const validationMessage = useRef(null);
+  gsap.set(validationMessage.current, { yPercent: 0 });
   
-
   const handleChange = (field, event) => {
     fields[field] = event.target.value;
     setFields(fields);
@@ -62,22 +61,19 @@ function Login(): JSX.Element {
       login(fields);
 
       let tl = gsap.timeline({paused: true});
-      tl.from(versoRef.current, { yPercent: 0 });
-      tl.to(versoRef.current, { yPercent: -100 });
+      tl.from(validationMessage.current, { yPercent: 0 });
+      tl.to(validationMessage.current, { yPercent: -100 });
       tl.play()
 
       const relocation = () => {
-        console.log(fields)
         window.location.href = "/lists"
       }
       setTimeout(relocation, 3000)
-
     }
   };
 
   return (
-    <main className="wrapper">
-      <div className="triangle"></div>
+    <main className="wrapper wrapper--form">
       <form
         encType="multipart/form-data"
         onSubmit={(e) => handleSubmit(e)}
@@ -112,11 +108,11 @@ function Login(): JSX.Element {
           Connecte toi
         </button>
         <p>
-          Tu n'as pas de compte ? Enregistre toi <Link to="/login" className="form__link">ici</Link>
+          Tu n'as pas de compte ? Enregistre toi <Link to="/signup" className="form__link">ici</Link>
         </p>
         <section
           className="form__verso"
-          ref={versoRef}
+          ref={validationMessage}
         >
           <h2 className="form__verso__title">Parfait !</h2>
           <p>{"Ravie de te revoir :)"}</p>
