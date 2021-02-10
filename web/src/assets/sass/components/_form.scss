@@ -1,7 +1,7 @@
 .wrapper--form {
   height: 100vh;
-  background-size: cover;
-  background-image: url("../../images/colourful-gifts-white-background.jpg");
+  background-repeat: repeat-x;
+  background-image: url("../../images/ribbon.png");
   background-position: bottom;
 }
 
@@ -9,7 +9,8 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  height: 700px;
+  height: 600px;
+  margin-top: 30px;
   padding: 60px;
   background-color: white;
   border: $color-secondary solid 2px;
@@ -41,6 +42,8 @@
     border: solid 2px black;
     &:hover {
       cursor: pointer;
+      border: solid 3px black;
+      font-size: 15px;
     }
   }
   &__link {
@@ -49,10 +52,10 @@
 
   &__verso {
     padding: 60px;
-    height: 700px;
+    height: 600px;
     width: 100%;
     left: 0;
-    top: 700px;
+    top: 600px;
     position: absolute;
     background-color: $color-secondary;
     &__title {

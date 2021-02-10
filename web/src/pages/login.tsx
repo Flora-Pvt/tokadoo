@@ -80,7 +80,7 @@ function Login(): JSX.Element {
         noValidate
         className="form"
       >
-        <h2>Connecte toi</h2>
+        <h2>Connexion</h2>
 
         <input
           required
