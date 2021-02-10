@@ -9,6 +9,7 @@ import {
 } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "urql";
+import { gsap } from "gsap";
 
 import checkInputs from "../utils/checkInputs";
 
@@ -61,14 +62,17 @@ function Signup(): JSX.Element {
   const fileInput:
     | MutableRefObject<any>
     | DetailedHTMLProps<
-        InputHTMLAttributes<HTMLInputElement>,
-        HTMLInputElement
-      > = useRef({});
+      InputHTMLAttributes<HTMLInputElement>,
+      HTMLInputElement
+    > = useRef({});
   const [fileOutput, setFileOutput]: [
     string,
     Dispatch<SetStateAction<string>>
   ] = useState("./images/icons/gift.svg");
   const [, register] = useMutation(REGISTER_MUT);
+
+  const versoRef = useRef(null);
+  gsap.set(versoRef.current, { yPercent: 0 });
 
   const handleChange = (field, event) => {
     fields[field] = event.target.value;
@@ -125,18 +129,32 @@ function Signup(): JSX.Element {
       // temp avatar handling
       fields["avatar"] = fileOutput;
       setFields(fields);
+
       register(fields);
+
+      let tl = gsap.timeline({ pause: true });
+      tl.from(versoRef.current, { yPercent: 0 });
+      tl.to(versoRef.current, { yPercent: -100 });
+      tl.play();
+
+      const relocation = () => {
+        console.log(fields)
+        window.location.href = "/lists"
+      }
+      setTimeout(relocation, 3000)
     }
   };
 
   return (
     <main className="wrapper">
-      <h1>Inscription</h1>
+      <div className="triangle"></div>
       <form
         encType="multipart/form-data"
         onSubmit={(e) => handleSubmit(e)}
         noValidate
+        className="form"
       >
+        <h2>Inscris toi</h2>
         <input
           ref={fileInput}
           name="avatar"
@@ -144,118 +162,128 @@ function Signup(): JSX.Element {
           hidden
           accept="image/*"
           onChange={(e) => handleImageLoaded(e)}
+          className="form__input"
         />
         <img className="form__avatar" src={fileOutput} alt="avatar miniture" />
         <button
           title="Ajouter votre image d'avatar"
           onClick={() => handleAddImage()}
+          className="form__avatar__button"
         ></button>
-        <span>{errors["avatar"]}</span>
+        <span className="form__error">{errors["avatar"]}</span>
 
-        <label htmlFor="firstname">Prénom</label>
         <input
           required
-          id="firstname"
           name="firstname"
           type="text"
+          placeholder="Prénom"
           value={fields["firstname"]}
           onChange={(e) => handleChange("firstname", e)}
+          className="form__input"
         />
-        <span>{errors["firstname"]}</span>
+        <span className="form__error">{errors["firstname"]}</span>
 
-        <label htmlFor="lastname">Nom</label>
         <input
           required
-          id="lastname"
           name="lastname"
           type="text"
+          placeholder="Nom"
           value={fields["lastname"]}
           onChange={(e) => handleChange("lastname", e)}
+          className="form__input"
         />
-        <span>{errors["lastname"]}</span>
+        <span className="form__error">{errors["lastname"]}</span>
 
-        <label htmlFor="email">Mail</label>
         <input
           required
-          id="email"
           name="email"
           type="email"
+          placeholder="Mail"
           value={fields["email"]}
           onChange={(e) => handleChange("email", e)}
+          className="form__input"
         />
-        <span>{errors["email"]}</span>
+        <span className="form__error">{errors["email"]}</span>
 
-        <label htmlFor="password">Mot de passe</label>
         <input
           required
-          id="password"
           name="password"
           type="password"
+          placeholder="Mot de passe"
           value={fields["password"]}
           onChange={(e) => handleChange("password", e)}
+          className="form__input"
         />
-        <span>{errors["password"]}</span>
+        <span className="form__error">{errors["password"]}</span>
 
-        <label htmlFor="adressLineOne">Adresse ligne 1</label>
         <input
           required
-          id="adressLineOne"
           name="adressLineOne"
           type="text"
+          placeholder="Adresse ligne 1"
           value={fields["adressLineOne"]}
           onChange={(e) => handleChange("adressLineOne", e)}
+          className="form__input"
         />
-        <span>{errors["adressLineOne"]}</span>
+        <span className="form__error">{errors["adressLineOne"]}</span>
 
-        <label htmlFor="adressLineTwo">Adresse ligne 2</label>
         <input
-          id="adressLineTwo"
           name="adressLineTwo"
           type="text"
+          placeholder="Adresse ligne 2"
           value={fields["adressLineTwo"]}
           onChange={(e) => handleChange("adressLineTwo", e)}
+          className="form__input"
         />
-        <span>{errors["adressLineTwo"]}</span>
+        <span className="form__error">{errors["adressLineTwo"]}</span>
 
-        <label htmlFor="city">Ville</label>
         <input
           required
-          id="city"
           name="city"
           type="text"
+          placeholder="Ville"
           value={fields["city"]}
           onChange={(e) => handleChange("city", e)}
+          className="form__input"
         />
-        <span>{errors["city"]}</span>
+        <span className="form__error">{errors["city"]}</span>
 
-        <label htmlFor="province">Province/Département</label>
         <input
           required
-          id="province"
           name="province"
           type="text"
+          placeholder="Province/Département"
           value={fields["province"]}
           onChange={(e) => handleChange("province", e)}
+          className="form__input"
         />
-        <span>{errors["province"]}</span>
+        <span className="form__error">{errors["province"]}</span>
 
-        <label htmlFor="zip">Code postal</label>
         <input
           required
-          id="zip"
           name="zip"
           type="text"
+          placeholder="Code postal"
           value={fields["zip"]}
           onChange={(e) => handleChange("zip", e)}
+          className="form__input"
         />
-        <span>{errors["zip"]}</span>
+        <span className="form__error">{errors["zip"]}</span>
 
-        <button type="submit" onClick={(e) => handleSubmit(e)}>
-          Créer un compte
+        <button type="submit" onClick={(e) => handleSubmit(e)} className="form__button">
+          Créer ton compte
         </button>
         <p>
-          Vous avez déjà un compte ? Connectez vous <Link to="/login">ici</Link>
+          Tu as déjà un compte ? Connecte toi <Link to="/login" className="form__link">ici</Link>
         </p>
+        <section
+          className="form__verso"
+          ref={versoRef}
+        >
+          <h2 className="form__verso__title">Parfait !</h2>
+          <p>Tu peux maintenant créer ta première liste !</p>
+
+        </section>
       </form>
     </main>
   );

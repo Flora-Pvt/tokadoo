@@ -4,9 +4,10 @@ import { Provider, createClient } from "urql";
 
 import Navbar from "./parts/Navbar";
 
-import Home from "./pages/Home";
-import List from "./pages/List";
-import Signup from "./pages/Signup";
+import Home from "./pages/home";
+import List from "./pages/lists";
+import Signup from "./pages/signup";
+import Login from "./pages/login";
 
 import User from "./components/User";
 
@@ -72,6 +73,12 @@ function App() {
         <Switch>
           <Route exact path="/signup">
             <Signup />
+          </Route>
+        </Switch>
+
+        <Switch>
+          <Route exact path="/login">
+            <Login />
           </Route>
         </Switch>
 

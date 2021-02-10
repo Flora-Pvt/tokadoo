@@ -1,4 +1,64 @@
-.form__avatar {
-  width: 30px;
-  height: 30px;
+.triangle {
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 1000px solid $color-secondary-light;
+  border-right: 1000px solid transparent;
+}
+
+.form {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 700px;
+  padding: 60px;
+  background-color: white;
+  border: $color-secondary solid 2px;
+  overflow: hidden;
+  position: relative;
+
+  &__avatar {
+    width: 30px;
+    height: 30px;
+    &__button {
+      width: 20px;
+      height: 20px;
+      margin: -12px 0 0 15px;
+    }
+  }
+  &__input {
+    height: 40px;
+    margin-top: 10px;
+    padding: 10px;
+    border: solid 1px $color-tertiary;
+    &:focus {
+      border: black;
+    }
+  }
+  &__button {
+    margin: 10px 0;
+    height: 40px;
+    background-color: transparent;
+    border: solid 2px black;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__link {
+    text-decoration: underline;
+  }
+
+  &__verso {
+    padding: 60px;
+    height: 700px;
+    width: 100%;
+    left: 0;
+    top: 700px;
+    position: absolute;
+    background-color: $color-secondary;
+    &__title {
+      margin-bottom: 40px;
+    }
+  }
 }
