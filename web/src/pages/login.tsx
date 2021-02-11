@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { useMutation } from "urql";
 import { gsap } from "gsap";
 
+import Canvas from "../components/Canvas/index"
+
 const LOGIN_MUT = `
 mutation Login(
   $email: String!
@@ -38,7 +40,7 @@ function Login(): JSX.Element {
 
   const validationMessage = useRef(null);
   gsap.set(validationMessage.current, { yPercent: 0 });
-  
+
   const handleChange = (field, event) => {
     fields[field] = event.target.value;
     setFields(fields);
@@ -60,7 +62,7 @@ function Login(): JSX.Element {
 
       login(fields);
 
-      let tl = gsap.timeline({paused: true});
+      let tl = gsap.timeline({ paused: true });
       tl.from(validationMessage.current, { yPercent: 0 });
       tl.to(validationMessage.current, { yPercent: -100 });
       tl.play()
@@ -74,6 +76,9 @@ function Login(): JSX.Element {
 
   return (
     <main className="wrapper wrapper--form">
+
+      <Canvas></Canvas>
+
       <form
         encType="multipart/form-data"
         onSubmit={(e) => handleSubmit(e)}
