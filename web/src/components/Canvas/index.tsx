@@ -16,24 +16,14 @@ function Canvas() {
     setCoordinates([...coordinates, currentCoord]);
   };
 
-  const handleClearCanvas = () => {
-    setCoordinates([]);
-  };
-
   return (
-    <main className="App-main">
       <canvas
-        className="App-canvas"
         ref={canvasRef}
         width={canvasWidth}
         height={canvasHeight}
         onClick={handleCanvasClick}
+        
       />
-
-      <div className="button">
-        <button onClick={handleClearCanvas}> CLEAR </button>
-      </div>
-    </main>
   );
 }
 

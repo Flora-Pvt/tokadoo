@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useMutation } from "urql";
 import { gsap } from "gsap";
 
-import Canvas from "../components/Canvas/index"
+import Animation from "../components/Canvas/test"
 
 const LOGIN_MUT = `
 mutation Login(
@@ -77,7 +77,7 @@ function Login(): JSX.Element {
   return (
     <main className="wrapper wrapper--form">
 
-      <Canvas></Canvas>
+      <Animation></Animation>
 
       <form
         encType="multipart/form-data"

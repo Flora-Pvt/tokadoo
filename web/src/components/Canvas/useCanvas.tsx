@@ -1,73 +1,34 @@
 import { useState, useEffect, useRef } from "react";
 
-// Path2D for a Heart SVG
-const heartSVG =
-  "M0 200 v-200 h200 a100,100 90 0,1 0,200 a100,100 90 0,1 -200,0 z";
-let GIFT_PATH = new Path2D();
-GIFT_PATH.rect(0, 0, 500, 550)
-
-let TOP_GIFT_PATH = new Path2D();
-TOP_GIFT_PATH.rect(300, -10, 200, 650)
-
-let RIBBON_GIFT_PATH = new Path2D();
-RIBBON_GIFT_PATH.rect(300, 270, 200, 100)
-
-let RIBBON2_GIFT_PATH = new Path2D();
-RIBBON2_GIFT_PATH.rect(0, 230, 290, 100)
+// let GIFT_PATH = new Path2D();
 
 // Scaling Constants for Canvas
-const SCALE = 0.1;
+const SCALE = 0.5;
 const OFFSET = 80;
-export const canvasWidth = window.innerWidth * 0.5;
-export const canvasHeight = window.innerHeight * 0.5;
+export const canvasWidth = window.innerWidth;
+export const canvasHeight = window.innerHeight;
 
-export function draw(ctx, location) {
+export function draw(ctx, location): any {
+  var time = new Date();
   console.log("attempting to draw");
-  ctx.fillStyle = "orange";
-  ctx.shadowColor = "blue";
-  ctx.shadowBlur = 2;
   ctx.save();
   ctx.scale(SCALE, SCALE);
   ctx.translate(location.x / SCALE - OFFSET, location.y / SCALE - OFFSET);
-  ctx.rotate((225 * Math.PI) / 180);
-  ctx.fill(GIFT_PATH);
-  ctx.restore();
+  //ctx.rotate((225 * Math.PI) / 180);
+  ctx.rotate( ((2*Math.PI)/60)*time.getSeconds() + ((2*Math.PI)/60000)*time.getMilliseconds() );
 
-  console.log("attempting to draw");
-  ctx.fillStyle = "orange";
-  ctx.shadowColor = "blue";
-  ctx.shadowBlur = 2;
-  ctx.save();
-  ctx.scale(SCALE, SCALE);
-  ctx.translate(location.x / SCALE - OFFSET, location.y / SCALE - OFFSET);
-  ctx.rotate((225 * Math.PI) / 180);
-  ctx.fill(TOP_GIFT_PATH);
-  // .restore(): Canvas 2D API restores the most recently saved canvas state
-  ctx.restore();
+  ctx.beginPath();
+  ctx.moveTo(100,500);
+  ctx.rect(100,60,100,100);
+  ctx.closePath();
+  
+  ctx.fillStyle = "lightblue";
+  ctx.lineWidth = 2;
+  ctx.fill();
 
-  console.log("attempting to draw");
-  ctx.fillStyle = "red";
-  ctx.shadowColor = "blue";
-  ctx.shadowBlur = 2;
-  ctx.save();
-  ctx.scale(SCALE, SCALE);
-  ctx.translate(location.x / SCALE - OFFSET, location.y / SCALE - OFFSET);
-  ctx.rotate((225 * Math.PI) / 180);
-  ctx.fill(RIBBON_GIFT_PATH);
-  // .restore(): Canvas 2D API restores the most recently saved canvas state
   ctx.restore();
-
-  console.log("attempting to draw");
-  ctx.fillStyle = "red";
-  ctx.shadowColor = "blue";
-  ctx.shadowBlur = 2;
-  ctx.save();
-  ctx.scale(SCALE, SCALE);
-  ctx.translate(location.x / SCALE - OFFSET, location.y / SCALE - OFFSET);
-  ctx.rotate((225 * Math.PI) / 180);
-  ctx.fill(RIBBON2_GIFT_PATH);
-  // .restore(): Canvas 2D API restores the most recently saved canvas state
-  ctx.restore();
+  
+ 
 }
 
 export function useCanvas() {
