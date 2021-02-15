@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 import { useMutation } from "urql";
 import { gsap } from "gsap";
 
-import Animation from "../components/Canvas/test"
-
 const LOGIN_MUT = `
 mutation Login(
   $email: String!
@@ -75,9 +73,7 @@ function Login(): JSX.Element {
   };
 
   return (
-    <main className="wrapper wrapper--form">
-
-      <Animation></Animation>
+    <main className="wrapper">
 
       <form
         encType="multipart/form-data"
