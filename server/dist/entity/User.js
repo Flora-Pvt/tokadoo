@@ -43,31 +43,6 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
-__decorate([
-    type_graphql_1.Field(() => String),
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], User.prototype, "adressLineOne", void 0);
-__decorate([
-    type_graphql_1.Field(() => String),
-    typeorm_1.Column({ nullable: true }),
-    __metadata("design:type", String)
-], User.prototype, "adressLineTwo", void 0);
-__decorate([
-    type_graphql_1.Field(() => String),
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], User.prototype, "city", void 0);
-__decorate([
-    type_graphql_1.Field(() => String),
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], User.prototype, "province", void 0);
-__decorate([
-    type_graphql_1.Field(() => String),
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], User.prototype, "zip", void 0);
 User = __decorate([
     type_graphql_1.ObjectType(),
     typeorm_1.Entity()

@@ -56,6 +56,20 @@ body {
   }
 }
 
+/* ----- sign up ----- */
+.form {
+  &__error {
+    color: $color-primary-dark;
+  }
+  &__link {
+    color: $color-secondary;
+  }
+  &__verso {
+    color: white;
+  }
+}
+
+
 /* ----- list ----- */
 .list {
 	&__add {

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import LocomotiveScroll from "locomotive-scroll";
+import "../assets/sass/utils/locomotive-scroll.scss"
 
 function Home() {
   useEffect(() => {
@@ -22,21 +23,21 @@ function Home() {
               data-scroll-speed="3"
             >
               Tokadoo
-              </span>
+            </span>
             <span
               data-scroll=""
               data-scroll-speed="1"
               className="home__text-inner--small"
             >
               partager une belle liste de cadeaux,
-              </span>
+            </span>
             <p
               data-scroll=""
               data-scroll-speed="1"
               className="home__text-inner--small"
             >
               garder la surprise jusqu'à la fin.
-              </p>
+            </p>
           </div>
 
           <figure className="home__item">
@@ -44,7 +45,7 @@ function Home() {
               <div className="lists">
                 <h2 className="lists__username">
                   Liste de cadeaux pour Jane Doe
-                      <img
+                  <img
                     className="lists__avatar"
                     alt="avatar of your friend"
                     src={`./images/avatars/pexels-1.jpg`}
@@ -52,7 +53,7 @@ function Home() {
                 </h2>
                 <p className="lists__add">
                   Ajouter ton premier cadeau !
-                      <img
+                  <img
                     className="lists__add__icon"
                     alt="signe plus"
                     src="./images/icons/plus.svg"
@@ -61,7 +62,6 @@ function Home() {
               </div>
             </div>
 
-
             <figcaption className="home__item-caption">
               <h2
                 className="home__item-title"
@@ -69,7 +69,7 @@ function Home() {
                 data-scroll-speed="1"
               >
                 Crée ta liste
-                </h2>
+              </h2>
               <span className="home__item-number">01</span>
             </figcaption>
           </figure>
@@ -80,7 +80,7 @@ function Home() {
                 <div className="lists">
                   <h2 className="lists__username">
                     Liste de cadeaux pour Jane Doe
-                      <img
+                    <img
                       className="lists__avatar"
                       alt="avatar of your friend"
                       src={`./images/avatars/pexels-1.jpg`}
@@ -106,7 +106,7 @@ function Home() {
                         <p> sac à main </p>
                         <p className="lists__todo__infos__link">
                           https://acheter.com/sacamain
-                          </p>
+                        </p>
                         <p>29,30 CA$</p>
                         <p>quantité : 1</p>
                       </section>
@@ -134,7 +134,7 @@ function Home() {
                         <p> livre </p>
                         <p className="lists__todo__infos__link">
                           https://acheter.com/livre
-                          </p>
+                        </p>
                         <p>29,30 CA$</p>
                         <p>quantité : 1</p>
                       </section>
@@ -162,7 +162,7 @@ function Home() {
                         <p> bracelet </p>
                         <p className="lists__todo__infos__link">
                           https://acheter.com/bracelet
-                          </p>
+                        </p>
                         <p>29,30 CA$</p>
                         <p>quantité : 1</p>
                       </section>
@@ -179,8 +179,6 @@ function Home() {
                         />
                       </section>
                     </li>
-
-
                   </ul>
                 </div>
               </div>
@@ -192,7 +190,7 @@ function Home() {
                 data-scroll-speed="1"
               >
                 Ajoute tes articles
-                </h2>
+              </h2>
               <span className="home__item-number">02</span>
             </figcaption>
           </figure>
@@ -221,7 +219,6 @@ function Home() {
                     alt="logo whatsapp"
                     src={`./images/icons/whatsapp.svg`}
                   />
-
                 </div>
               </div>
             </div>
@@ -232,7 +229,7 @@ function Home() {
                 data-scroll-speed="1"
               >
                 Partage à tes proches
-                </h2>
+              </h2>
               <span className="home__item-number">03</span>
             </figcaption>
           </figure>
@@ -244,7 +241,7 @@ function Home() {
               data-scroll-speed="1"
             >
               Crée ta liste
-              </p>
+            </p>
             <a
               data-scroll=""
               data-scroll-speed="3"

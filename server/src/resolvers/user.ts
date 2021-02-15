@@ -30,21 +30,15 @@ class UserInputs {
 
   @Field()
   password: string;
+}
+
+@InputType()
+class LoginInputs {
+  @Field()
+  email: string;
 
   @Field()
-  adressLineOne: string;
-
-  @Field()
-  adressLineTwo: string;
-
-  @Field()
-  city: string;
-
-  @Field()
-  province: string;
-
-  @Field()
-  zip: string;
+  password: string;
 }
 
 @ObjectType()
@@ -97,11 +91,6 @@ export class UserResolver {
       avatar: options.avatar,
       email: options.email,
       password: hashedPassword,
-      adressLineOne: options.adressLineOne,
-      adressLineTwo: options.adressLineTwo,
-      city: options.city,
-      province: options.province,
-      zip: options.zip,
     };
     try {
       // need query to return after save
@@ -117,7 +106,7 @@ export class UserResolver {
 
   @Mutation(() => UserResponse)
   async login(
-    @Arg("options") options: UserInputs,
+    @Arg("options") options: LoginInputs,
     @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
     const user = await getConnection()

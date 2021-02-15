@@ -39,7 +39,7 @@
         vertical-align: middle;
       }
     }
-  }  
+  }
 
   &__container {
     display: flex;
@@ -79,8 +79,8 @@
       top: 400px;
       position: absolute;
       z-index: 2;
-      &>p{
-margin: 10px;
+      & > p {
+        margin: 10px;
       }
     }
 
@@ -91,6 +91,5 @@ margin: 10px;
         margin-left: 10px;
       }
     }
-
   }
 }

@@ -43,29 +43,22 @@ __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
 ], UserInputs.prototype, "password", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], UserInputs.prototype, "adressLineOne", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], UserInputs.prototype, "adressLineTwo", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], UserInputs.prototype, "city", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], UserInputs.prototype, "province", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], UserInputs.prototype, "zip", void 0);
 UserInputs = __decorate([
     type_graphql_1.InputType()
 ], UserInputs);
+let LoginInputs = class LoginInputs {
+};
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], LoginInputs.prototype, "email", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], LoginInputs.prototype, "password", void 0);
+LoginInputs = __decorate([
+    type_graphql_1.InputType()
+], LoginInputs);
 let FieldError = class FieldError {
 };
 __decorate([
@@ -120,11 +113,6 @@ let UserResolver = class UserResolver {
             avatar: options.avatar,
             email: options.email,
             password: hashedPassword,
-            adressLineOne: options.adressLineOne,
-            adressLineTwo: options.adressLineTwo,
-            city: options.city,
-            province: options.province,
-            zip: options.zip,
         };
         try {
             await typeorm_1.getConnection().getRepository(User_1.User).save(user);
@@ -175,7 +163,7 @@ __decorate([
     __param(0, type_graphql_1.Arg("options")),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [UserInputs, Object]),
+    __metadata("design:paramtypes", [LoginInputs, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "login", null);
 UserResolver = __decorate([
