@@ -1,12 +1,9 @@
-import {
-  useState,
-  useRef,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "urql";
 import { gsap } from "gsap";
+
+import GiftsBGAnimation from "../components/GiftsBGAnimation"
 
 const LOGIN_MUT = `
 mutation Login(
@@ -39,6 +36,16 @@ function Login(): JSX.Element {
   const validationMessage = useRef(null);
   gsap.set(validationMessage.current, { yPercent: 0 });
 
+  useEffect(() => {
+    console.log("monté");
+    
+    GiftsBGAnimation()
+    return () => {
+      console.log("démonté");
+      GiftsBGAnimation().stop()
+    }
+  }, [])
+
   const handleChange = (field, event) => {
     fields[field] = event.target.value;
     setFields(fields);
@@ -63,18 +70,17 @@ function Login(): JSX.Element {
       let tl = gsap.timeline({ paused: true });
       tl.from(validationMessage.current, { yPercent: 0 });
       tl.to(validationMessage.current, { yPercent: -100 });
-      tl.play()
+      tl.play();
 
       const relocation = () => {
-        window.location.href = "/lists"
-      }
-      setTimeout(relocation, 3000)
+        window.location.href = "/lists";
+      };
+      setTimeout(relocation, 3000);
     }
   };
 
   return (
     <main className="wrapper">
-
       <form
         encType="multipart/form-data"
         onSubmit={(e) => handleSubmit(e)}
@@ -105,19 +111,22 @@ function Login(): JSX.Element {
         />
         <span className="form__error">{errors["password"]}</span>
 
-        <button type="submit" onClick={(e) => handleSubmit(e)} className="form__button">
+        <button
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+          className="form__button"
+        >
           Connecte toi
         </button>
         <p>
-          Tu n'as pas de compte ? Enregistre toi <Link to="/signup" className="form__link">ici</Link>
+          Tu n'as pas de compte ? Enregistre toi{" "}
+          <Link to="/signup" className="form__link">
+            ici
+          </Link>
         </p>
-        <section
-          className="form__verso"
-          ref={validationMessage}
-        >
+        <section className="form__verso" ref={validationMessage}>
           <h2 className="form__verso__title">Parfait !</h2>
           <p>{"Ravie de te revoir :)"}</p>
-
         </section>
       </form>
     </main>

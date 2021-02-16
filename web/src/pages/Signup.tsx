@@ -1,6 +1,7 @@
 import {
   useState,
   useRef,
+  useEffect,
   Dispatch,
   SetStateAction,
   MutableRefObject,
@@ -11,6 +12,7 @@ import { Link } from "react-router-dom";
 import { useMutation } from "urql";
 import { gsap } from "gsap";
 
+import GiftsBGAnimation from "../components/GiftsBGAnimation"
 import checkInputs from "../utils/checkInputs";
 
 const REGISTER_MUT = `
@@ -63,6 +65,15 @@ function Signup(): JSX.Element {
 
   const versoRef = useRef(null);
   gsap.set(versoRef.current, { yPercent: 0 });
+
+  useEffect(() => {
+    console.log("monté");
+    GiftsBGAnimation()
+    return () => {
+      console.log("démonté");
+      GiftsBGAnimation().stop()
+    }
+  }, [])
 
   const handleChange = (field, event) => {
     fields[field] = event.target.value;
