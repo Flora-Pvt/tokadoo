@@ -1,32 +1,34 @@
-import Matter, {
+import {
   Engine,
   Render,
   Runner,
   Composites,
+  Common,
   MouseConstraint,
   Mouse,
   World,
   Bodies,
 } from "matter-js";
 
-import gift from "../assets/images/giftbox.svg"
+//Icons made by https://www.freepik.com from https://www.flaticon.com/
+import orangeGift from "../assets/images/orange-gift.svg"
+import yellowGift from "../assets/images/yellow-gift.svg"
 
 function GiftsBGAnimation() {
+
   // create engine
-  const engine = Engine.create(),
+  let engine = Engine.create(),
     world = engine.world;
 
-    console.log(window.innerWidth, window.innerHeight);
-
   // create renderer
-  const render = Render.create({
+  let render = Render.create({
     element: document.body,
     engine: engine,
     options: {
       width: window.innerWidth,
       height: window.innerHeight,
       showAngleIndicator: false,
-      wireframes: false, 
+      wireframes: false,
       background: "transparent"
     },
   });
@@ -34,15 +36,15 @@ function GiftsBGAnimation() {
   Render.run(render);
 
   // create runner
-  const runner = Runner.create();
+  let runner = Runner.create();
   Runner.run(runner, engine);
 
   // add bodies
-  const offset = 10,
+  let offset = 10,
     options = {
-      isStatic: true, 
+      isStatic: true,
       render: {
-        fillStyle: "blue"
+        fillStyle: "transparent"
       }
     };
 
@@ -52,28 +54,42 @@ function GiftsBGAnimation() {
   World.add(world, [
     Bodies.rectangle(400, -offset, window.innerWidth, 10, options),
     Bodies.rectangle(400, 600, window.innerWidth, 10, options),
-    Bodies.rectangle((window.innerWidth -510) + offset, 300, 10, window.innerHeight, options),
+    Bodies.rectangle((window.innerWidth - 510) + offset, 300, 10, window.innerHeight, options),
     Bodies.rectangle(-235, 300, 10, window.innerHeight, options)
   ]);
 
-  const stack = Composites.stack(20, 20, 10, 4, 0, 0, function (x, y) {
-    return Bodies.rectangle(x, y, 50, 50, {
-      render: {
-        strokeStyle: '#ffffff',
-        sprite: {
-          texture: gift
+  let stack = Composites.stack(0, 0, 10, 4, 0, 0, function (x, y) {
+    if (Common.random() > 0.35) {
+      return Bodies.rectangle(x, y, 64, 64, {
+        render: {
+          strokeStyle: '#ffffff',
+          sprite: {
+            texture: yellowGift
+          }
         }
-      }
-    });
+      });
+    } else {
+      return Bodies.circle(x, y, 35, {
+        density: 0.0005,
+        frictionAir: 0.06,
+        restitution: 0.3,
+        friction: 0.01,
+        render: {
+          sprite: {
+            texture: orangeGift
+          }
+        }
+      });
+    }
   });
 
   World.add(world, stack);
 
   // add mouse control
-  const mouse = Mouse.create(render.canvas),
-    mouseConstraint = MouseConstraint.create(engine, {
+  let mouse = Mouse.create(render.canvas),
+    mouseletraint = MouseConstraint.create(engine, {
       mouse: mouse,
-      constraint: {
+      letraint: {
         stiffness: 0.2,
         render: {
           visible: false
@@ -81,7 +97,7 @@ function GiftsBGAnimation() {
       }
     });
 
-  World.add(world, mouseConstraint);
+  World.add(world, mouseletraint);
 
   // keep the mouse in sync with rendering
   render.mouse = mouse;
@@ -99,13 +115,16 @@ function GiftsBGAnimation() {
     render: render,
     canvas: render.canvas,
     stop: function () {
-      Matter.Render.stop(render);
-      Matter.Runner.stop(runner);
+      World.clear(world);
+      Engine.clear(engine);
+      Render.stop(render);
+      Runner.stop(runner);
+      render.canvas.remove();
+      render.canvas = null;
+      render.context = null;
+      render.textures = {};
     }
   };
 }
-
-GiftsBGAnimation.title = "Soft Body";
-GiftsBGAnimation.for = ">=0.14.2";
 
 export default GiftsBGAnimation;

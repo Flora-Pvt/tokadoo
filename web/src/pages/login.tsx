@@ -37,7 +37,13 @@ function Login(): JSX.Element {
   gsap.set(validationMessage.current, { yPercent: 0 });
 
   useEffect(() => {
+    console.log("monté");
+    
     GiftsBGAnimation()
+    return () => {
+      console.log("démonté");
+      GiftsBGAnimation().stop()
+    }
   }, [])
 
   const handleChange = (field, event) => {
