@@ -126,7 +126,7 @@ class GiftsBGAnimation extends Component {
   }
 
   render() {
-    return <div ref="scene" />;
+    return <div ref="scene" className="canvas" />;
   }
 }
 
