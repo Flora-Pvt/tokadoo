@@ -8,40 +8,11 @@ import {
   InputHTMLAttributes,
 } from "react";
 import { Link } from "react-router-dom";
-import { useMutation } from "urql";
 import { gsap } from "gsap";
 
 import GiftsBGAnimation from "../components/GiftsBGAnimation";
 import checkInputs from "../utils/checkInputs";
-
-const REGISTER_MUT = `
-mutation Register(
-  $firstname: String!
-  $lastname: String!
-  $password: String!
-  $avatar: String!
-  $email: String!
-) {
-  register(
-    options: {
-      firstname: $firstname
-      lastname: $lastname
-      password: $password
-      avatar: $avatar
-      email: $email
-    }
-  ) {
-    errors {
-      field
-      message
-    }
-    user {
-      id
-      firstname
-    }
-  }
-}
-`;
+import { useRegisterMutation } from "../generated/graphql";
 
 function Signup(): JSX.Element {
   const [fields, setFields]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
@@ -63,7 +34,7 @@ function Signup(): JSX.Element {
     string,
     Dispatch<SetStateAction<string>>
   ] = useState("./images/icons/gift.svg");
-  const [, register] = useMutation(REGISTER_MUT);
+  const [, register] = useRegisterMutation()
 
   const versoRef = useRef(null);
   gsap.set(versoRef.current, { yPercent: 0 });
