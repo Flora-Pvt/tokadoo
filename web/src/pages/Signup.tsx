@@ -15,7 +15,31 @@ import checkInputs from "../utils/checkInputs";
 import { useRegisterMutation } from "../generated/graphql";
 
 function Signup(): JSX.Element {
-  const [fields, setFields]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
+  const [fields, setFields]: [
+    {
+      firstname: string;
+      lastname: string;
+      password: string;
+      avatar: string;
+      email: string;
+    },
+    Dispatch<
+      SetStateAction<{
+        firstname: string;
+        lastname: string;
+        password: string;
+        avatar: string;
+        email: string;
+      }>
+    >
+  ] = useState({
+    firstname: "",
+    lastname: "",
+    password: "",
+    avatar: "",
+    email: "",
+  });
+  
   const [errors, setErrors]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
 
   const [avatar, setAvatar]: [
@@ -34,7 +58,7 @@ function Signup(): JSX.Element {
     string,
     Dispatch<SetStateAction<string>>
   ] = useState("./images/icons/gift.svg");
-  const [, register] = useRegisterMutation()
+  const [, register] = useRegisterMutation();
 
   const versoRef = useRef(null);
   gsap.set(versoRef.current, { yPercent: 0 });
