@@ -6,9 +6,12 @@ import GiftsBGAnimation from "../components/GiftsBGAnimation";
 import { useLoginMutation } from "../generated/graphql";
 
 function Login(): JSX.Element {
-  const [fields, setFields]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
+  const [fields, setFields]: [
+    { email: string; password: string },
+    Dispatch<SetStateAction<{ email: string; password: string }>>
+  ] = useState({ email: "", password: "" });
   const [errors, setErrors]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
-  const [, login] = useLoginMutation()
+  const [, login] = useLoginMutation();
 
   const validationMessage = useRef(null);
   gsap.set(validationMessage.current, { yPercent: 0 });
