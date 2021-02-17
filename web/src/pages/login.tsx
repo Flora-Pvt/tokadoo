@@ -1,37 +1,17 @@
 import { useState, useRef, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
-import { useMutation } from "urql";
 import { gsap } from "gsap";
 
 import GiftsBGAnimation from "../components/GiftsBGAnimation";
-
-const LOGIN_MUT = `
-mutation Login(
-  $email: String!
-  $password: String!
-) {
-  login(
-    options: {
-      email: $email
-      password: $password      
-    }
-  ) {
-    errors {
-      field
-      message
-    }
-    user {
-      id
-      firstname
-    }
-  }
-}
-`;
+import { useLoginMutation } from "../generated/graphql";
 
 function Login(): JSX.Element {
-  const [fields, setFields]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
+  const [fields, setFields]: [
+    { email: string; password: string },
+    Dispatch<SetStateAction<{ email: string; password: string }>>
+  ] = useState({ email: "", password: "" });
   const [errors, setErrors]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
-  const [, login] = useMutation(LOGIN_MUT);
+  const [, login] = useLoginMutation();
 
   const validationMessage = useRef(null);
   gsap.set(validationMessage.current, { yPercent: 0 });
