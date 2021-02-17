@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useRef, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "urql";
 import { gsap } from "gsap";
 
-import GiftsBGAnimation from "../components/GiftsBGAnimation"
+import GiftsBGAnimation from "../components/GiftsBGAnimation";
 
 const LOGIN_MUT = `
 mutation Login(
@@ -35,16 +35,6 @@ function Login(): JSX.Element {
 
   const validationMessage = useRef(null);
   gsap.set(validationMessage.current, { yPercent: 0 });
-
-  useEffect(() => {
-    console.log("monté");
-    
-    GiftsBGAnimation()
-    return () => {
-      console.log("démonté");
-      GiftsBGAnimation().stop()
-    }
-  }, [])
 
   const handleChange = (field, event) => {
     fields[field] = event.target.value;
@@ -81,6 +71,8 @@ function Login(): JSX.Element {
 
   return (
     <main className="wrapper">
+      <GiftsBGAnimation />
+
       <form
         encType="multipart/form-data"
         onSubmit={(e) => handleSubmit(e)}

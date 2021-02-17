@@ -1,7 +1,6 @@
 import {
   useState,
   useRef,
-  useEffect,
   Dispatch,
   SetStateAction,
   MutableRefObject,
@@ -12,7 +11,7 @@ import { Link } from "react-router-dom";
 import { useMutation } from "urql";
 import { gsap } from "gsap";
 
-import GiftsBGAnimation from "../components/GiftsBGAnimation"
+import GiftsBGAnimation from "../components/GiftsBGAnimation";
 import checkInputs from "../utils/checkInputs";
 
 const REGISTER_MUT = `
@@ -47,16 +46,19 @@ mutation Register(
 function Signup(): JSX.Element {
   const [fields, setFields]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
   const [errors, setErrors]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
+
   const [avatar, setAvatar]: [
     string,
     Dispatch<SetStateAction<string>>
   ] = useState("");
+
   const fileInput:
     | MutableRefObject<any>
     | DetailedHTMLProps<
-      InputHTMLAttributes<HTMLInputElement>,
-      HTMLInputElement
-    > = useRef({});
+        InputHTMLAttributes<HTMLInputElement>,
+        HTMLInputElement
+      > = useRef({});
+
   const [fileOutput, setFileOutput]: [
     string,
     Dispatch<SetStateAction<string>>
@@ -65,15 +67,6 @@ function Signup(): JSX.Element {
 
   const versoRef = useRef(null);
   gsap.set(versoRef.current, { yPercent: 0 });
-
-  useEffect(() => {
-    console.log("monté");
-    GiftsBGAnimation()
-    return () => {
-      console.log("démonté");
-      GiftsBGAnimation().stop()
-    }
-  }, [])
 
   const handleChange = (field, event) => {
     fields[field] = event.target.value;
@@ -102,12 +95,7 @@ function Signup(): JSX.Element {
 
     checkInputs(
       fields,
-      [
-        "firstname",
-        "lastname",
-        "email",
-        "password"
-      ],
+      ["firstname", "lastname", "email", "password"],
       errors,
       formValidity
     );
@@ -135,14 +123,16 @@ function Signup(): JSX.Element {
       tl.play();
 
       const relocation = () => {
-        window.location.href = "/lists"
-      }
-      setTimeout(relocation, 3000)
+        window.location.href = "/lists";
+      };
+      setTimeout(relocation, 3000);
     }
   };
 
   return (
-    <main className="wrapper wrapper--form">
+    <main className="wrapper">
+      <GiftsBGAnimation />
+
       <form
         encType="multipart/form-data"
         onSubmit={(e) => handleSubmit(e)}
@@ -211,19 +201,22 @@ function Signup(): JSX.Element {
         />
         <span className="form__error">{errors["password"]}</span>
 
-        <button type="submit" onClick={(e) => handleSubmit(e)} className="form__button">
+        <button
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+          className="form__button"
+        >
           Créer ton compte
         </button>
         <p>
-          Tu as déjà un compte ? Connecte toi <Link to="/login" className="form__link">ici</Link>
+          Tu as déjà un compte ? Connecte toi{" "}
+          <Link to="/login" className="form__link">
+            ici
+          </Link>
         </p>
-        <section
-          className="form__verso"
-          ref={versoRef}
-        >
+        <section className="form__verso" ref={versoRef}>
           <h2 className="form__verso__title">Parfait !</h2>
           <p>Tu peux maintenant créer ta première liste !</p>
-
         </section>
       </form>
     </main>
