@@ -99,9 +99,9 @@ class GiftsBGAnimation extends Component {
 
     // add mouse control
     let mouse = Mouse.create(render.canvas),
-      mouseletraint = MouseConstraint.create(engine, {
+      mouseconstraint = MouseConstraint.create(engine, {
         mouse: mouse,
-        letraint: {
+        constraint: {
           stiffness: 0.2,
           render: {
             visible: false,
@@ -109,7 +109,7 @@ class GiftsBGAnimation extends Component {
         },
       });
 
-    World.add(world, mouseletraint);
+    World.add(world, mouseconstraint);
 
     // keep the mouse in sync with rendering
     render.mouse = mouse;
