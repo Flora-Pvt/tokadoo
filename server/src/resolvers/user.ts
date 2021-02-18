@@ -98,10 +98,12 @@ export class UserResolver {
     } catch (err) {
       if (err.code === "ER_DUP_ENTRY")
         return {
-          errors: [{ field: "email", message: "cet email est déjà enregistré" }],
+          errors: [
+            { field: "email", message: "cet email est déjà enregistré" },
+          ],
         };
     }
-    return user;
+    return { user };
   }
 
   @Mutation(() => UserResponse)
@@ -125,7 +127,7 @@ export class UserResolver {
     }
 
     //store user id to keep logged in with cookie
-    req.session!.userId = user.id; 
+    req.session!.userId = user.id;
 
     return { user };
   }

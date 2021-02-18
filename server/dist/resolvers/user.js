@@ -120,10 +120,12 @@ let UserResolver = class UserResolver {
         catch (err) {
             if (err.code === "ER_DUP_ENTRY")
                 return {
-                    errors: [{ field: "email", message: "cet email est déjà enregistré" }],
+                    errors: [
+                        { field: "email", message: "cet email est déjà enregistré" },
+                    ],
                 };
         }
-        return user;
+        return { user };
     }
     async login(options, { req }) {
         const user = await typeorm_1.getConnection()
