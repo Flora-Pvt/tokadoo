@@ -10,9 +10,10 @@ import {
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 
-import GiftsBGAnimation from "../components/GiftsBGAnimation";
 import checkInputs from "../utils/checkInputs";
 import { useRegisterMutation } from "../generated/graphql";
+import { toErrorMap } from "../utils/toErrorMap";
+import GiftsBGAnimation from "../components/GiftsBGAnimation";
 
 function Signup(): JSX.Element {
   const [fields, setFields]: [
@@ -39,7 +40,7 @@ function Signup(): JSX.Element {
     avatar: "",
     email: "",
   });
-  
+
   const [errors, setErrors]: [{}, Dispatch<SetStateAction<{}>>] = useState({});
 
   const [avatar, setAvatar]: [
@@ -64,8 +65,11 @@ function Signup(): JSX.Element {
   gsap.set(versoRef.current, { yPercent: 0 });
 
   const handleChange = (field, event) => {
+    console.log(fields);
+
     fields[field] = event.target.value;
     setFields(fields);
+    console.log(fields);
   };
 
   const handleAddImage = () => {
@@ -99,7 +103,7 @@ function Signup(): JSX.Element {
     return formValidity;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (handleValidation()) {
@@ -109,18 +113,21 @@ function Signup(): JSX.Element {
       fields["avatar"] = fileOutput;
       setFields(fields);
 
-      register(fields);
+      const response = await register(fields);
+      if (response.data?.register.errors) {
+        setErrors(toErrorMap(response.data.register.errors));
+      } else if (response.data?.register.user) {
+        // animation
+        let tl = gsap.timeline({ pause: true });
+        tl.from(versoRef.current, { yPercent: 0 });
+        tl.to(versoRef.current, { yPercent: -100 });
+        tl.play();
 
-      // animation
-      let tl = gsap.timeline({ pause: true });
-      tl.from(versoRef.current, { yPercent: 0 });
-      tl.to(versoRef.current, { yPercent: -100 });
-      tl.play();
-
-      const relocation = () => {
-        window.location.href = "/lists";
-      };
-      setTimeout(relocation, 3000);
+        const relocation = () => {
+          window.location.href = "/lists";
+        };
+        setTimeout(relocation, 3000);
+      }
     }
   };
 

@@ -101,7 +101,7 @@ let UserResolver = class UserResolver {
                 errors: [
                     {
                         field: "password",
-                        message: "password length must be greater than 7",
+                        message: "le mot de passe doit contenir au moins 7 caractères",
                     },
                 ],
             };
@@ -120,7 +120,7 @@ let UserResolver = class UserResolver {
         catch (err) {
             if (err.code === "ER_DUP_ENTRY")
                 return {
-                    errors: [{ field: "email", message: "this email already exist" }],
+                    errors: [{ field: "email", message: "cet email est déjà enregistré" }],
                 };
         }
         return user;
@@ -131,13 +131,13 @@ let UserResolver = class UserResolver {
             .findOne({ email: options.email });
         if (!user) {
             return {
-                errors: [{ field: "email", message: "this email doesn't exist" }],
+                errors: [{ field: "email", message: "cet email n'est pas enregistré" }],
             };
         }
         const validPassword = await argon2_1.default.verify(user.password, options.password);
         if (!validPassword) {
             return {
-                errors: [{ field: "password", message: "incorrect password" }],
+                errors: [{ field: "password", message: "mot de passe incorrect" }],
             };
         }
         req.session.userId = user.id;

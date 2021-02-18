@@ -2,8 +2,9 @@ import { useState, useRef, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 
-import GiftsBGAnimation from "../components/GiftsBGAnimation";
 import { useLoginMutation } from "../generated/graphql";
+import { toErrorMap } from "../utils/toErrorMap";
+import GiftsBGAnimation from "../components/GiftsBGAnimation";
 
 function Login(): JSX.Element {
   const [fields, setFields]: [
@@ -29,23 +30,26 @@ function Login(): JSX.Element {
     return formValidity;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (handleValidation()) {
       setErrors("");
 
-      login(fields);
+      const response = await login(fields);
+      if (response.data?.login.errors) {
+        setErrors(toErrorMap(response.data.login.errors));
+      } else if (response.data?.login.user) {
+        let tl = gsap.timeline({ paused: true });
+        tl.from(validationMessage.current, { yPercent: 0 });
+        tl.to(validationMessage.current, { yPercent: -100 });
+        tl.play();
 
-      let tl = gsap.timeline({ paused: true });
-      tl.from(validationMessage.current, { yPercent: 0 });
-      tl.to(validationMessage.current, { yPercent: -100 });
-      tl.play();
-
-      const relocation = () => {
-        window.location.href = "/lists";
-      };
-      setTimeout(relocation, 3000);
+        const relocation = () => {
+          window.location.href = "/lists";
+        };
+        setTimeout(relocation, 3000);
+      }
     }
   };
 
