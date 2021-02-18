@@ -27,6 +27,7 @@ function Signup(): JSX.Element {
           email: "",
         }}
         onSubmit={async (values, { setErrors }) => {
+
           const response = await register(values);
 
           if (response.data?.register.errors) {
@@ -51,7 +52,7 @@ function Signup(): JSX.Element {
               type="file"
               hidden
               accept="image/*"
-              onChange={(event: React.ChangeEvent<any> ) =>
+              onChange={(event: React.ChangeEvent<any>) =>
                 form.setFieldValue("avatar", event.target.files[0])
               }
               className="form__input"
@@ -71,31 +72,31 @@ function Signup(): JSX.Element {
               className="form__input"
             />
 
-            <InputField name="email" placeholder="email" type="email" />
+            <InputField name="email" placeholder="Mail" type="email" />
 
             <InputField
               name="password"
-              placeholder="password"
+              placeholder="Mot de passe"
               type="password"
             />
 
             <button type="submit" className="form__button">
               Créer ton compte
             </button>
+
+            <p>
+              Tu as déjà un compte ? Connecte toi{" "}
+              <Link to="/login" className="form__link">
+                ici
+        </Link>
+            </p>
+            <section className="form__verso" ref={validationMessage}>
+              <h2 className="form__verso__title">Parfait !</h2>
+              <p>Tu peux maintenant créer ta première liste !</p>
+            </section>
           </Form>
         )}
       </Formik>
-
-      <p>
-        Tu as déjà un compte ? Connecte toi{" "}
-        <Link to="/login" className="form__link">
-          ici
-        </Link>
-      </p>
-      <section className="form__verso" ref={validationMessage}>
-        <h2 className="form__verso__title">Parfait !</h2>
-        <p>Tu peux maintenant créer ta première liste !</p>
-      </section>
     </main>
   );
 }

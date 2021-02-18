@@ -28,7 +28,7 @@ function Login(): JSX.Element {
           if (response.data?.login.errors) {
             setErrors(toErrorMap(response.data.login.errors));
           } else if (response.data?.login.user) {
-            
+
             let tl = gsap.timeline({ paused: true });
             tl.from(validationMessage.current, { yPercent: 0 });
             tl.to(validationMessage.current, { yPercent: -100 });
@@ -43,11 +43,11 @@ function Login(): JSX.Element {
       >
         {() => (
           <Form className="form">
-            <InputField name="email" placeholder="email" />
+            <InputField name="email" placeholder="Mail" />
 
             <InputField
               name="password"
-              placeholder="password"
+              placeholder="Mot de passe"
               type="password"
             />
 
@@ -55,21 +55,22 @@ function Login(): JSX.Element {
               type="submit"
               className="form__button"
             >
-              register
+              Connecte toi
             </button>
+            <p>
+              Pas encore de compte ? Enregistre toi{" "}
+              <Link to="/login" className="form__link">
+                ici
+          </Link>
+            </p>
+            <section className="form__verso" ref={validationMessage}>
+              <h2 className="form__verso__title">Parfait !</h2>
+              <p>Tu peux maintenant créer ta première liste !</p>
+            </section>
           </Form>
         )}
       </Formik>
-      <p>
-        Tu as déjà un compte ? Connecte toi{" "}
-        <Link to="/login" className="form__link">
-          ici
-          </Link>
-      </p>
-      <section className="form__verso" ref={validationMessage}>
-        <h2 className="form__verso__title">Parfait !</h2>
-        <p>Tu peux maintenant créer ta première liste !</p>
-      </section>
+
     </main>
   );
 }
