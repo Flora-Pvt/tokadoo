@@ -33,6 +33,7 @@ function Signup(): JSX.Element {
           if (response.data?.register.errors) {
             setErrors(toErrorMap(response.data.register.errors));
           } else if (response.data?.register.user) {
+            
             let tl = gsap.timeline({ paused: true });
             tl.from(validationMessage.current, { yPercent: 0 });
             tl.to(validationMessage.current, { yPercent: -100 });

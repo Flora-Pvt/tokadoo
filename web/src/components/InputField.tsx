@@ -3,7 +3,6 @@ import { useField } from "formik";
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
-  textarea?: boolean;
 };
 
 export const InputField: React.FC<InputFieldProps> = ({
