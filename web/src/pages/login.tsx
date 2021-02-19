@@ -29,10 +29,16 @@ function Login(): JSX.Element {
             setErrors(toErrorMap(response.data.login.errors));
           } else if (response.data?.login.user) {
 
+            console.log(response.data?.login.user.id);
+            
+
             let tl = gsap.timeline({ paused: true });
             tl.from(validationMessage.current, { yPercent: 0 });
             tl.to(validationMessage.current, { yPercent: -100 });
             tl.play();
+
+            localStorage.setItem("qid", JSON.stringify(response.data?.login.user.id))
+
 
             const relocation = () => {
               window.location.href = "/lists";

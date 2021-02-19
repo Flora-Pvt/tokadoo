@@ -62,14 +62,13 @@ class UserResponse {
 @Resolver()
 export class UserResolver {
   @Query(() => User, { nullable: true })
-  async loggedUser(@Ctx() { req }: MyContext) {
+  loggedUser(@Ctx() { req }: MyContext) {
+    console.log(req.session);
+
     if (!req.session.userId) {
       return null;
     }
-    const user = await getConnection()
-      .getRepository(User)
-      .findOne({ id: req.session.userId });
-    return user;
+    return User.findOne(req.session.userId);
   }
 
   @Mutation(() => UserResponse)
@@ -111,9 +110,7 @@ export class UserResolver {
     @Arg("options") options: LoginInputs,
     @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
-    const user = await getConnection()
-      .getRepository(User)
-      .findOne({ email: options.email });
+    const user = await User.findOne({ email: options.email });
     if (!user) {
       return {
         errors: [{ field: "email", message: "cet email n'est pas enregistré" }],
@@ -128,7 +125,7 @@ export class UserResolver {
 
     //store user id to keep logged in with cookie
     req.session!.userId = user.id;
-
+    console.log(req.session);
     return { user };
   }
 }

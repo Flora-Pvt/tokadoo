@@ -86,14 +86,12 @@ UserResponse = __decorate([
     type_graphql_1.ObjectType()
 ], UserResponse);
 let UserResolver = class UserResolver {
-    async loggedUser({ req }) {
+    loggedUser({ req }) {
+        console.log(req.session);
         if (!req.session.userId) {
             return null;
         }
-        const user = await typeorm_1.getConnection()
-            .getRepository(User_1.User)
-            .findOne({ id: req.session.userId });
-        return user;
+        return User_1.User.findOne(req.session.userId);
     }
     async register(options, {}) {
         if (options.password.length < 8) {
@@ -128,9 +126,7 @@ let UserResolver = class UserResolver {
         return { user };
     }
     async login(options, { req }) {
-        const user = await typeorm_1.getConnection()
-            .getRepository(User_1.User)
-            .findOne({ email: options.email });
+        const user = await User_1.User.findOne({ email: options.email });
         if (!user) {
             return {
                 errors: [{ field: "email", message: "cet email n'est pas enregistré" }],
@@ -143,6 +139,7 @@ let UserResolver = class UserResolver {
             };
         }
         req.session.userId = user.id;
+        console.log(req.session);
         return { user };
     }
 };
@@ -151,7 +148,7 @@ __decorate([
     __param(0, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], UserResolver.prototype, "loggedUser", null);
 __decorate([
     type_graphql_1.Mutation(() => UserResponse),

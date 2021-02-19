@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
+// import { useLoggedUserQuery } from "../generated/graphql";
 
-function Navbar() {
-  const currentUserId = 1;
+interface NavBarProps {}
+
+const NavBar: React.FC<NavBarProps> = () => {
+  // const [{ data, fetching }] = useLoggedUserQuery();
+    // console.log(data?.loggedUser);
+
+  const data = localStorage.getItem("qid");
 
   return (
     <nav className="navbar">
@@ -10,7 +16,7 @@ function Navbar() {
       </Link>
 
       <section className="navbar__links">
-        {document.cookie === "" ? (
+        {!data ? (
           <>
             {" "}
             <Link to="/signup" aria-label="link to signup">
@@ -25,7 +31,10 @@ function Navbar() {
             <Link to="/lists" aria-label="link to the new lists">
               <p className="navbar__links__oneLink">Voir mes listes</p>
             </Link>
-            <Link to={"/profil/" + currentUserId} aria-label="link to my page">
+            <Link
+              to={"/profil/" + data}
+              aria-label="link to my page"
+            >
               <p className="navbar__links__oneLink">Mon profil</p>
             </Link>
           </>
@@ -33,6 +42,6 @@ function Navbar() {
       </section>
     </nav>
   );
-}
+};
 
-export default Navbar;
+export default NavBar;
